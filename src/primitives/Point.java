@@ -15,7 +15,7 @@ public class Point {
      * @param z The z coordinate of the point.
      */
     public Point(double x, double y, double z) {
-        xyz = Double3(X, Y, Z);
+        xyz = new Double3(x, y, z);
     }
 
     /**
@@ -73,14 +73,14 @@ public class Point {
      * @return The distance between this point and the other point.
      */
     public double distance(Point other) {
-        return Math.sqrt(distanceSquared(other))
+        return Math.sqrt(distanceSquared(other));
     }
 
     public Point add(Vector vector) {
         return new Point(xyz.add(vector.xyz));
     }
 
-    public Point subtract(Point p1) {
-        return new Vector(Point.xyz.subtract(Point.xyz));
+    public Vector subtract(Point p1) {
+        return new Vector(xyz.subtract(p1.xyz));
     }
 }

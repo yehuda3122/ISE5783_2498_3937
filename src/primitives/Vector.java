@@ -19,6 +19,13 @@ public class Vector extends Point {
             throw new IllegalArgumentException("vector cannot be ZERO");
         }
     }
+    public Vector add(Vector vector) {
+        Double3 xyz = this.xyz.add(vector.xyz);
+        if(xyz.equals(Double3.ZERO)){
+            throw new IllegalArgumentException("creation of  ZERO Vector not allowed");
+        }
+        return new Vector(xyz);
+    }
 
     /**
      * Constructs a new Vector object with the coordinates from the specified Double3 object.
@@ -39,7 +46,7 @@ public class Vector extends Point {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Vector vector)) return false;
-        return xyz.equals(Vector.xyz);
+        return xyz.equals(vector.xyz);
     }
 
     /**
@@ -48,7 +55,7 @@ public class Vector extends Point {
      * @return the length of this Vector
      */
     public double length() {
-        return Math.sqrt(lengthSquared())
+        return Math.sqrt(lengthSquared());
     }
 
     /**
@@ -80,7 +87,7 @@ public class Vector extends Point {
     public Vector crossProduct(Vector u) {
         double dx = xyz.d2 * u.xyz.d3 - xyz.d3 * u.xyz.d2;
         double dy = xyz.d3 * u.xyz.d1 - xyz.d1 * u.xyz.d3;
-        double dz = xyz.d2 * u.xyz.d1 - xyz.d1 * u.xyz.d2;
+        double dz = xyz.d1 * u.xyz.d2 - xyz.d2 * u.xyz.d2;
         return new Vector(dx,dy,dz);
     }
 }
