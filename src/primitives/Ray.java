@@ -10,6 +10,14 @@ public class Ray {
         dir = vector.normalize();
     }
 
+    public Point getP0() {
+        return p0;
+    }
+
+    public Vector getDir() {
+        return dir;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,4 +37,6 @@ public class Ray {
                 ", dir=" + dir +
                 '}';
     }
+
+
 }

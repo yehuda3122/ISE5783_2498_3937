@@ -32,9 +32,9 @@ public class Point {
      * @return true if the objects are equal, false otherwise.
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Point point)) return false;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Point point)) return false;
         return xyz.equals(point.xyz);
     }
 
@@ -53,7 +53,7 @@ public class Point {
      */
     @Override
     public String toString() {
-        return "Point" + xyz;
+        return "Point" + super.toString();
     }
 
     /**
