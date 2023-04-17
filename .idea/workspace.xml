@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="mashehu acher">
+    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="sofsof">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,10 +18,17 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -34,15 +42,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="geometries" />
@@ -52,6 +63,13 @@
       <recent name="D:\מיני פרוייקט בהנדסת תוכנה\ISE5783_2498_3937\src" />
       <recent name="D:\מיני פרוייקט בהנדסת תוכנה\ISE5783_2498_3937\src\geometries" />
       <recent name="D:\מיני פרוייקט בהנדסת תוכנה\ISE5783_2498_3937\src\primitives" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="primitives" />
+      <recent name="geometries" />
     </key>
   </component>
   <component name="RunManager">
@@ -91,20 +109,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1678109146562</updated>
     </task>
-    <task id="LOCAL‎-00003" summary="mashehu acher">
-      <created>1679431303589</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL‎-00003" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1679431303590</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="building structure and add functions to the classes" />
-    <MESSAGE value="mashehu acher" />
-    <option name="LAST_COMMIT_MESSAGE" value="mashehu acher" />
+    <option name="LAST_COMMIT_MESSAGE" value="building structure and add functions to the classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
