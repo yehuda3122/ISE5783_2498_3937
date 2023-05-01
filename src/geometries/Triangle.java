@@ -35,4 +35,9 @@ public class Triangle extends Polygon{
                 ", p2=" + p2 +
                 '}';
     }
+
+    @Override
+    public Vector getNormal(Point point) {
+        return super.getNormal(point);
+    }
 }

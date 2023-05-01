@@ -2,24 +2,31 @@ package primitives;
 
 import org.junit.jupiter.api.Test;
 
+import static primitives.Util.isZero;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PointTest {
 
     @Test
     void testTestEquals() {
-    }
-
-    @Test
-    void testTestToString() {
+        Point p1 = new Point(1, 2, 3);
+        assertEquals(p1.add(new Vector(-1,-2,-3)),
+                new Point(0,0,0),"Point + Vector does not work correctly");
     }
 
     @Test
     void testDistanceSquared() {
+        Point p1 = new Point(1, 2, 3);
+        assertTrue(isZero(p1.distanceSquared(new Point(3,5,6))-22),
+                "Distance Squared does not work correctly");
     }
 
     @Test
     void testDistance() {
+        Point p1 = new Point(1, 2, 3);
+        assertTrue(isZero(new Point(5,5,3).distance(p1)-5) ,
+                "Distance does not work correctly");
     }
 
     @Test

@@ -1,14 +1,12 @@
 package geometries;
-
-import org.junit.jupiter.api.Test;
 import primitives.*;
 
 import geometries.*;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-class PlaneTest {
+class TriangleTest {
     /// three points to configure plane
     Point p1 = new Point(1, 2, 3);
     Point p2 = new Point(4, 7, 11);
@@ -22,21 +20,13 @@ class PlaneTest {
     Plane pl = new Plane(new Point(0, 0, 1), new Vector(1, 1, 1));
     @Test
     void getNormal() {
+// ============ Equivalence Partitions Tests ==============
+        // test that normal of plane returned is equal to expected normal vector
         double x = 9 / (7 * Math.sqrt(2));
         double y = 1 / (7 * Math.sqrt(2));
         double z = (-2) * Math.sqrt(2) / 7;
 
         assertEquals(new Vector(x, y, z),
                 plane.getNormal(), "normal vector is not returned correctly");
-    }
-
-    @Test
-    void testGetNormal() {
-        double x = 9 / (7 * Math.sqrt(2));
-        double y = 1 / (7 * Math.sqrt(2));
-        double z = (-2) * Math.sqrt(2) / 7;
-
-        assertEquals(new Vector(x, y, z),
-                plane.getNormal(new Point(1,1,1)), "normal vector is not returned correctly");
     }
 }

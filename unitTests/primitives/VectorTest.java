@@ -8,7 +8,7 @@ import static primitives.Util.isZero;
 class VectorTest {
 
     @org.junit.jupiter.api.Test
-    void add() {
+    void testadd() {
         Vector v1 = new Vector(1,2,3);
         assertEquals(
                 new Vector(2,4,6),
@@ -17,7 +17,7 @@ class VectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void scale() {
+    void testscale() {
         Vector v1 = new Vector(2,4,6);
         assertEquals(
                 new Vector(4,8,12),
@@ -26,7 +26,7 @@ class VectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void length() {
+    void testlength() {
         Vector v1 = new Vector(4,0,0);
         assertEquals(
                 4,
@@ -35,7 +35,7 @@ class VectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void lengthSquared() {
+    void testlengthSquared() {
         Vector v1 = new Vector(4,2,3);
         assertEquals(
                 29,
@@ -44,7 +44,7 @@ class VectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void normalize() {
+    void testnormalize() {
         Vector v1 = new Vector(4,0,0);
         assertEquals(
                 new Vector(1,0,0),
@@ -53,7 +53,7 @@ class VectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void dotProduct() {
+    void testdotProduct() {
         Vector v1 = new Vector(1,2,3);
         assertEquals(
                 10,
@@ -62,7 +62,7 @@ class VectorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void crossProduct() {
+    void testcrossProduct() {
         Vector v1 = new Vector(1, 2, 3);
 
 // ============ Equivalence Partitions Tests ==============
