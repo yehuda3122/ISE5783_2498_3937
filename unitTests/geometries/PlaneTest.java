@@ -20,14 +20,28 @@ class PlaneTest {
 
     Plane plane = new Plane(p1, p2, p3);
     Plane pl = new Plane(new Point(0, 0, 1), new Vector(1, 1, 1));
-    @Test
-    void getNormal() {
-        double x = 9 / (7 * Math.sqrt(2));
-        double y = 1 / (7 * Math.sqrt(2));
-        double z = (-2) * Math.sqrt(2) / 7;
 
-        assertEquals(new Vector(x, y, z),
-                plane.getNormal(), "normal vector is not returned correctly");
+    /**
+     * Test method for {@link geometries.Plane#Plane(Point, Point, Point)}.
+     */
+    @Test
+    void testConstructorBVA01() {
+        /// all points are on same line
+        assertThrows(IllegalArgumentException.class,
+                () -> new Plane(p1, p5, p4),
+                "constructed a plane with parallel vertices");
+    }
+
+    /**
+     * Test method for {@link geometries.Plane#Plane(Point, Point, Point)}.
+     */
+    @Test
+    void testConstructorBVA02() {
+        /// two point are equal
+        assertThrows(IllegalArgumentException.class,
+                () -> new Plane(p1, p1, p4),
+                "constructed a plane with points that are equal");
+
     }
 
     @Test
@@ -37,6 +51,7 @@ class PlaneTest {
         double z = (-2) * Math.sqrt(2) / 7;
 
         assertEquals(new Vector(x, y, z),
-                plane.getNormal(new Point(1,1,1)), "normal vector is not returned correctly");
+                plane.getNormal(), "normal vector is not returned correctly");
     }
+
 }

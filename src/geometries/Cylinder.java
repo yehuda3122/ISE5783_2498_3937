@@ -3,6 +3,8 @@ package geometries;
 import primitives.*;
 import primitives.*;
 
+import static primitives.Util.isZero;
+
 public class Cylinder extends Tube {
 
     final public double height;
@@ -15,6 +17,19 @@ public class Cylinder extends Tube {
 
     @Override
     public Vector getNormal(Point point) {
+        Vector direction = axis.getDir();
+        Point P0 = axis.getP0();
+
+        //given point is on base of cylinder
+        if(point.equals(P0)||isZero(point.subtract(P0).dotProduct(direction)))
+            return direction.normalize();
+
+
+        // given point is on top base of the cylinder
+        if (point.equals(P0.add(direction.scale((int) height)))||isZero(point.subtract(P0.add(direction.scale((int) height))).dotProduct(direction)))
+            return direction.normalize();
+
+        // given point is on the circumference of cylinder
         return super.getNormal(point);
     }
 }
