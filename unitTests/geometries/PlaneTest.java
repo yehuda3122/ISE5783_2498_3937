@@ -54,4 +54,9 @@ class PlaneTest {
                 plane.getNormal(), "normal vector is not returned correctly");
     }
 
+    @Test
+    void testfindIntersections() {
+
+    }
+
 }

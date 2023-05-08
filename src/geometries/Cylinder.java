@@ -3,6 +3,8 @@ package geometries;
 import primitives.*;
 import primitives.*;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 public class Cylinder extends Tube {
@@ -31,5 +33,9 @@ public class Cylinder extends Tube {
 
         // given point is on the circumference of cylinder
         return super.getNormal(point);
+    }
+
+    public List<Point> findIntsersections(Ray ray) {
+        return null;
     }
 }
