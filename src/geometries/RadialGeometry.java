@@ -4,7 +4,7 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-public class RadialGeometry implements Geometry {
+public abstract class RadialGeometry implements Geometry {
     final protected double radius;
 
 
@@ -19,7 +19,9 @@ public class RadialGeometry implements Geometry {
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<Point> findIntersections(Ray ray) {
         return null;
     }
+
+
 }

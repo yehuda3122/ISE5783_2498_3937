@@ -22,9 +22,33 @@ public class Point {
      * Constructs a new Point object with the coordinates from a Double3 object.
      * @param double3 A Double3 object containing the x, y, and z coordinates of the point.
      */
-    Point(Double3 double3) {
+    public Point(Double3 double3) {
         this(double3.d1, double3.d2, double3.d3);
     }
+
+    /**
+     * get X axis coordinate of a point
+     * @return X axis coordinate - (double)
+     */
+    public double getX() {
+        return xyz.d1;
+    }
+
+    /**
+     * get Y axis coordinate of a point
+     * @return Y axis coordinate - (double)
+     */
+    public double getY() {
+        return xyz.d2;
+    }
+
+    /**
+     * get Z axis coordinate of a point
+     * @return Z axis coordinate - (double)
+     */
+    public double getZ() { return xyz.d3; }
+
+
 
     /**
      * Checks if this point is equal to another object.

@@ -51,7 +51,7 @@ public class Vector extends Point {
      * @param sca the scalar value to multiply this vector by
      * @return a new vector that is the result of scaling this vector by the specified scalar value
      */
-    public Vector scale(int sca) {
+    public Vector scale(double sca) {
         return new Vector(xyz.d1 * sca, xyz.d2 * sca, xyz.d3 * sca);
     }
 
