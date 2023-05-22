@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="adding test and realization">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/CameraIntegrationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/CameraIntegrationsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/CameraTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/CameraTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="implement camaraIntegrationsTest and function" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -212,7 +207,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1683564522241</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="implement camaraIntegrationsTest and function">
+      <created>1684752514060</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1684752514060</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,7 +235,8 @@
     <MESSAGE value="added more tests" />
     <MESSAGE value="adding test and realization" />
     <MESSAGE value="implement FindIntersections in Sphere" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement FindIntersections in Sphere" />
+    <MESSAGE value="implement camaraIntegrationsTest and function" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement camaraIntegrationsTest and function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
