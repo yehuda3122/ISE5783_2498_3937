@@ -37,9 +37,6 @@ public class Camera {
 //        printInterval = camBuilder.printInterval;
     }
 
-    public Ray constructRay(int nX, int nY, int j, int i) {
-        return null;
-    }
 
 
     //region Camera Builder
@@ -206,10 +203,10 @@ public class Camera {
          * @param aliasing {@link AntiAliasing} method
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setAntiAliasing(AntiAliasing aliasing) {
-            this.antiAliasing = aliasing;
-            return this;
-        }
+//        public CameraBuilder setAntiAliasing(AntiAliasing aliasing) {
+//            this.antiAliasing = aliasing;
+//            return this;
+//        }
 
         /**
          * setter for first parameter of n*m used for random ray casting loop
@@ -217,10 +214,10 @@ public class Camera {
          * @param num value of parameter
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setN(int num) {
-            this.n = num;
-            return this;
-        }
+//        public CameraBuilder setN(int num) {
+//            this.n = num;
+//            return this;
+//        }
 
         /**
          * setter for second parameter of n*m used for random ray casting loop
@@ -228,10 +225,10 @@ public class Camera {
          * @param num value of parameter
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setM(int num) {
-            this.m = num;
-            return this;
-        }
+//        public CameraBuilder setM(int num) {
+//            this.m = num;
+//            return this;
+//        }
 
         /**
          * setter for recursive depth field
@@ -239,10 +236,10 @@ public class Camera {
          * @param recurseDepth depth of recursion
          * @return value of depth of recursion wanted in adaptive anti-aliasing
          */
-        public CameraBuilder setRecurseDepth(int recurseDepth) {
-            this.recurseDepth = recurseDepth;
-            return this;
-        }
+//        public CameraBuilder setRecurseDepth(int recurseDepth) {
+//            this.recurseDepth = recurseDepth;
+//            return this;
+//        }
 
         /**
          * set image writing to file functionality of camera
@@ -250,10 +247,10 @@ public class Camera {
          * @param imageWriter instance of {@link ImageWriter} class ,enables writing a scene to jpeg file
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setImageWriter(ImageWriter imageWriter) {
-            this.imageWriter = imageWriter;
-            return this;
-        }
+//        public CameraBuilder setImageWriter(ImageWriter imageWriter) {
+//            this.imageWriter = imageWriter;
+//            return this;
+//        }
 
         /**
          * set image rendering functionality of camera
@@ -261,10 +258,10 @@ public class Camera {
          * @param rayTracer instance of {@link RayTracer} class - enables calculating color of each pixel
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setRayTracer(RayTracer rayTracer) {
-            this.rayTracer = rayTracer;
-            return this;
-        }
+//        public CameraBuilder setRayTracer(RayTracer rayTracer) {
+//            this.rayTracer = rayTracer;
+//            return this;
+//        }
 
         /**
          * set for dof field
@@ -272,10 +269,10 @@ public class Camera {
          * @param dof depth of field focal point distance from camera
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setDof(double dof) {
-            this.dof = dof;
-            return this;
-        }
+//        public CameraBuilder setDof(double dof) {
+//            this.dof = dof;
+//            return this;
+//        }
 
         /**
          * set for apertureRadius field
@@ -283,10 +280,10 @@ public class Camera {
          * @param apertureRadius radius of aperture of camera
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setApertureRadius(double apertureRadius) {
-            this.apertureRadius = apertureRadius;
-            return this;
-        }
+//        public CameraBuilder setApertureRadius(double apertureRadius) {
+//            this.apertureRadius = apertureRadius;
+//            return this;
+//        }
 
         /**
          * setter for use DOF field
@@ -294,10 +291,10 @@ public class Camera {
          * @param useDOF true if DOF is used , otherwise, false.
          * @return this {@link CameraBuilder} instance
          */
-        public CameraBuilder setUseDOF(boolean useDOF) {
-            this.useDOF = useDOF;
-            return this;
-        }
+//        public CameraBuilder setUseDOF(boolean useDOF) {
+//            this.useDOF = useDOF;
+//            return this;
+//        }
 
         /**
          * Set multi-threading <br>
@@ -306,17 +303,17 @@ public class Camera {
          * @param threads number of threads
          * @return the Render object itself
          */
-        public CameraBuilder setMultithreading(int threads) {
-            if (threads < -2)
-                throw new IllegalArgumentException("Multithreading parameter must be 0 or higher");
-            if (threads >= -1)
-                this.threadsCount = threads;
-            else {
-                int cores = Runtime.getRuntime().availableProcessors() - SPARE_THREADS;
-                this.threadsCount = cores <= 2 ? 1 : cores;
-            }
-            return this;
-        }
+//        public CameraBuilder setMultithreading(int threads) {
+//            if (threads < -2)
+//                throw new IllegalArgumentException("Multithreading parameter must be 0 or higher");
+//            if (threads >= -1)
+//                this.threadsCount = threads;
+//            else {
+//                int cores = Runtime.getRuntime().availableProcessors() - SPARE_THREADS;
+//                this.threadsCount = cores <= 2 ? 1 : cores;
+//            }
+//            return this;
+//        }
 
         /**
          * Set debug printing interval. If it's zero - there won't be printing at all
@@ -324,10 +321,10 @@ public class Camera {
          * @param interval printing interval in seconds
          * @return the Render object itself
          */
-        public CameraBuilder setDebugPrint(double interval) {
-            printInterval = interval;
-            return this;
-        }
+//        public CameraBuilder setDebugPrint(double interval) {
+//            printInterval = interval;
+//            return this;
+//        }
 
         /**
          * Builder pattern - build function - creates new camera
@@ -343,39 +340,131 @@ public class Camera {
     }
     //endregion
 
-    public Camera setVPSize(double width, double height) {
-        if (width < 0 || height < 0) {
-            throw new IllegalArgumentException("width and height cannot be negative ");
-        }
-        this.height = height;
-        this.width = width;
-    }
+//    public Camera setVPSize(double width, double height) {
+//        if (width < 0 || height < 0) {
+//            throw new IllegalArgumentException("width and height cannot be negative ");
+//        }
+//        this.height = height;
+//        this.width = width;
+//    }
 
+    /**
+     * getter for p0 field
+     *
+     * @return position point of camera
+     */
     public Point getP0() {
+
         return p0;
     }
 
+
+    /**
+     * getter for vTo field
+     *
+     * @return vector pointing towards view plane (-Z axis)
+     */
     public Vector getvTo() {
+
         return vTo;
     }
 
+    /**
+     * getter for vUp field
+     *
+     * @return vector pointing up ( Y axis)
+     */
     public Vector getvUp() {
+
         return vUp;
     }
 
+    /**
+     * getter for vRight field
+     *
+     * @return vector pointing right ( X axis)
+     */
     public Vector getvRight() {
+
         return vRight;
     }
 
+    /**
+     * getter for distance field
+     *
+     * @return distance between view plane from camera
+     */
     public double getDistance() {
+
         return distance;
     }
 
-    public int getWidth() {
+    /**
+     * getter for width field
+     *
+     * @return width of view plane "Physical" size
+     */
+    public double getWidth() {
+
         return width;
     }
 
-    public int getHeight() {
+    /**
+     * getter for height field
+     *
+     * @return height of view plane "Physical" size
+     */
+    public double getHeight() {
+
         return height;
     }
+
+    /**
+     * construct ray from a {@link Camera} towards center of a pixel in a view plane
+     *
+     * @param nX number of rows in view plane
+     * @param nY number of columns in view plane
+     * @param j  column index of pixel
+     * @param i  row index of pixel
+     * @return {@link Ray} from camera to center of pixel (i,j)
+     */
+    public Ray constructRay(int nX, int nY, int j, int i) {
+        //view plane center:
+        Point Pc = p0.add(vTo.scale(distance));
+
+        // calculate "size" of each pixel -
+        // height per pixel = total "physical" height / number of rows
+        // width per pixel = total "physical" width / number of columns
+        double Ry = (double) height / nX;
+        double Rx = (double) width / nY;
+
+        // set result point to middle of view plane
+        Point Pij = Pc;
+
+        // calculate necessary "size" needed to move from
+        // center of view plane to reach the middle point of pixel (i,j)
+        double yI = -(i - (nY - 1) / 2d) * Ry;
+        double xJ = (j - (nX - 1) / 2d) * Rx;
+
+        // if result of xJ is > 0
+        // move result point left/right on  X axis
+        // to reach middle point of pixel (i,j) (on X axis direction)
+        if (!isZero(xJ)) {
+            Pij = Pij.add(vRight.scale(xJ));
+        }
+
+        // if result of yI is > 0
+        // move result point up/down on Y axis
+        // to reach middle point of pixel (i,j)
+        if (!isZero(yI)) {
+            Pij = Pij.add(vUp.scale(yI));
+        }
+
+        //return ray from camera to middle point of pixel(i,j) in view plane
+        return new Ray(p0, Pij.subtract(p0));
+    }
+
 }
+
+
+
