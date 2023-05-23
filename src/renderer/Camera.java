@@ -1,8 +1,11 @@
 package renderer;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
+
+import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
 
@@ -14,6 +17,8 @@ public class Camera {
     private double distance;
     private double width;
     private double height;
+    private ImageWriter imageWriter = null;
+    private RayTracerBase rayTracerBase;
 
     private Camera(CameraBuilder camBuilder) {
 
@@ -28,8 +33,8 @@ public class Camera {
 //        n = camBuilder.n;
 //        m = camBuilder.m;
 //        recurseDepth = camBuilder.recurseDepth;
-//        imageWriter = camBuilder.imageWriter;
-//        rayTracer = camBuilder.rayTracer;
+        imageWriter = camBuilder.imageWriter;
+        rayTracerBase = camBuilder.rayTracerBase;
 //        dof = camBuilder.dof;
 //        apertureRadius = camBuilder.apertureRadius;
 //        useDOF = camBuilder.useDOF;
@@ -82,11 +87,11 @@ public class Camera {
 //        /**
 //         * image writing to file functionality object
 //         */
-//        private ImageWriter imageWriter;
+        private ImageWriter imageWriter;
 //        /**
 //         * calculate color of pixel functionality object
 //         */
-//        private RayTracer rayTracer;
+        private RayTracerBase rayTracerBase;
 //
 //        // anti-aliasing functionality
 //
@@ -247,21 +252,21 @@ public class Camera {
          * @param imageWriter instance of {@link ImageWriter} class ,enables writing a scene to jpeg file
          * @return this {@link CameraBuilder} instance
          */
-//        public CameraBuilder setImageWriter(ImageWriter imageWriter) {
-//            this.imageWriter = imageWriter;
-//            return this;
-//        }
+        public CameraBuilder setImageWriter(ImageWriter imageWriter) {
+            this.imageWriter = imageWriter;
+            return this;
+        }
 
         /**
          * set image rendering functionality of camera
          *
-         * @param rayTracer instance of {@link RayTracer} class - enables calculating color of each pixel
+         * @param rayTracerBase instance of {@link RayTracerBase} class - enables calculating color of each pixel
          * @return this {@link CameraBuilder} instance
          */
-//        public CameraBuilder setRayTracer(RayTracer rayTracer) {
-//            this.rayTracer = rayTracer;
-//            return this;
-//        }
+        public CameraBuilder setRayTracerBase(RayTracerBase rayTracerBase) {
+            this.rayTracerBase = rayTracerBase;
+            return this;
+        }
 
         /**
          * set for dof field
@@ -420,6 +425,103 @@ public class Camera {
     }
 
     /**
+     * print grid lines on  image
+     *
+     * @param interval interval ("physical" space) between each pair of grid lines
+     * @param color    color of grid lines
+     */
+    public void printGrid(int interval, Color color) {
+        if (imageWriter == null)
+            throw new MissingResourceException("image writer is not initialized", ImageWriter.class.getName(), "");
+        for (int i = 0; i < imageWriter.getNy(); i++) {
+            for (int j = 0; j < imageWriter.getNx(); j++) {
+                if (i % interval == 0 || j % interval == 0)
+                    imageWriter.writePixel(j, i, color);
+            }
+
+        }
+    }
+
+    /**
+     * cast a ray from camera through pixel (i,j) in view plane and get color of pixel
+     *
+     * @param Nx number of rows in view plane
+     * @param Ny number of columns in view plane
+     * @param j  column index of pixel
+     * @param i  row index of pixel
+     */
+    private void castRay(int Nx, int Ny, int j, int i) {
+        // construct ray through pixel
+        Ray ray = constructRay(Nx, Ny, j, i);
+        // return the color using ray tracer
+        Color color = rayTracer.traceRay(ray);
+        imageWriter.writePixel(j, i, color);
+    }
+
+    /**
+     * crate a jpeg file, with scene "captured" by camera
+     */
+    public void writeToImage() {
+        if (imageWriter == null)
+            throw new MissingResourceException("image writer is not initialized", ImageWriter.class.getName(), "");
+        imageWriter.writeToImage();
+    }
+
+    /**
+     * render image "captured" through view plane
+     */
+    public void renderImage() {
+        // check that image, writing and rendering objects are instantiated
+        if (imageWriter == null)
+            throw new MissingResourceException("image writer is not initialized", ImageWriter.class.getName(), "");
+
+        if (rayTracerBase == null)
+            throw new MissingResourceException("ray tracer is not initialized", RayTracerBase.class.getName(), "");
+
+        int nX = imageWriter.getNx();
+        int nY = imageWriter.getNy();
+
+        for (int i = 0; i <= nX; i++) {
+            for (int j = 0; j <= nY; j++) {
+                if(i%50 ==0 || j%50==0)
+                    imageWriter.writePixel(i,j,red);
+                else
+                    imageWriter.writePixel(i,j,yellow);
+            }
+        //initialize thread progress reporter
+//        Pixel.initialize(nY, nX, printInterval);
+//
+//        // for each pixel (i,j) , construct  ray/rays from camera through pixel,
+//        // functions use rayTracer object to get correct color, then use imageWriter to write pixel to the file
+//
+//        if (isUseDOF()) {
+//            renderImageDOF(nX,nY);
+//        }
+//        //cast ray according to Anti-Aliasing method set to Camera
+//        else {
+//            switch (getAntiAliasing()) {
+//                // no method used - cast single ray to center of pixel
+//                case NONE -> {
+//                    renderImageAntiAliasingNone(nX,nY);
+//                }
+//                // bean of random rays cast for each pixel besides the ray towards the center
+//                case RANDOM -> {
+//                    renderImageAntiAliasingRandom(nX,nY);
+//                }
+//                // four rays cast to four corners of pixel besides the ray towards the center
+//                case CORNERS -> {
+//                    renderImageAntiAliasingCorners(nX,nY);
+//                }
+//                case ADAPTIVE -> {
+//                    renderImageAntiAliasingAdaptive(nX,nY);
+//                }
+//            }
+//        }
+    }
+
+
+
+    /**
      * construct ray from a {@link Camera} towards center of a pixel in a view plane
      *
      * @param nX number of rows in view plane
@@ -463,6 +565,7 @@ public class Camera {
         //return ray from camera to middle point of pixel(i,j) in view plane
         return new Ray(p0, Pij.subtract(p0));
     }
+
 
 }
 

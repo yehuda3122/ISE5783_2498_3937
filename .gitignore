@@ -27,3 +27,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+### Adding images folder to ignore ###
+D:\java project\ISE5783_2498_3937\images
