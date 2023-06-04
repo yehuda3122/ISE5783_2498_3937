@@ -50,7 +50,7 @@ public class Cylinder extends Tube {
         // crate plane that contains base point in it
         Plane basePlane= new Plane(basePoint,vC);
         // find intersection between ray and plane
-        List<Point> intersectionsBase = basePlane.findIntersections(ray);
+        List<Point> intersectionsBase = basePlane.findGeoIntersectionsHelper(ray);
 
         // if intersections were found, check that point are actually on the base of the cylinder
         //if distance from base point to intersection point holds the equation ->  distance² < from radius²

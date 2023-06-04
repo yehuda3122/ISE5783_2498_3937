@@ -15,7 +15,7 @@ import static primitives.Util.isZero;
 
  It implements the Geometry interface.
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     final Point p;
     final Vector normal;
 
@@ -72,7 +72,7 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
         Vector n = normal;
@@ -110,7 +110,7 @@ public class Plane implements Geometry {
         double t = alignZero(nQMinusP0 / nv);
         if (t > 0 ){
             //return immutable List
-            return List.of(ray.getPoint(t));
+            return List.of(new GeoPoint(this,ray.getPoint(t)));
         }
         // no intersection point  - ray and plane in opposite  direction
         return null;

@@ -39,7 +39,7 @@ public class Tube extends RadialGeometry{
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Vector v = ray.getDir();
         Vector vt = axis.getDir();
         Point pa = axis.getP0();
@@ -147,11 +147,11 @@ public class Tube extends RadialGeometry{
             // root < 0 indicates scale factor is in opposite direction
             // no intersection occurs
             if (t1 > 0 && t2 > 0 && distanceT1 && distanceT2)
-                return List.of(ray.getPoint(t2), ray.getPoint(t1));
+                return List.of(new GeoPoint(this,ray.getPoint(t2)),new GeoPoint(this, ray.getPoint(t1)));
             if (t1 > 0 && distanceT1)
-                return List.of(ray.getPoint(t1));
+                return List.of(new GeoPoint(this,ray.getPoint(t1)));
             if (t2 > 0 && distanceT2)
-                return List.of(ray.getPoint(t2));
+                return List.of(new GeoPoint(this,ray.getPoint(t2)));
         }
 
         return null;

@@ -43,7 +43,6 @@ public class Camera {
     }
 
 
-
     //region Camera Builder
 
     /**
@@ -83,12 +82,12 @@ public class Camera {
          */
         private double height;        //
 
-//        // functionality  fields
+        //        // functionality  fields
 //        /**
 //         * image writing to file functionality object
 //         */
         private ImageWriter imageWriter;
-//        /**
+        //        /**
 //         * calculate color of pixel functionality object
 //         */
         private RayTracerBase rayTracerBase;
@@ -454,7 +453,7 @@ public class Camera {
         // construct ray through pixel
         Ray ray = constructRay(Nx, Ny, j, i);
         // return the color using ray tracer
-        Color color = rayTracer.traceRay(ray);
+        Color color = rayTracerBase.traceRay(ray);
         imageWriter.writePixel(j, i, color);
     }
 
@@ -483,12 +482,9 @@ public class Camera {
 
         for (int i = 0; i <= nX; i++) {
             for (int j = 0; j <= nY; j++) {
-                if(i%50 ==0 || j%50==0)
-                    imageWriter.writePixel(i,j,red);
-                else
-                    imageWriter.writePixel(i,j,yellow);
+                castRay(nX, nY, j, i);
             }
-        //initialize thread progress reporter
+            //initialize thread progress reporter
 //        Pixel.initialize(nY, nX, printInterval);
 //
 //        // for each pixel (i,j) , construct  ray/rays from camera through pixel,
@@ -517,9 +513,8 @@ public class Camera {
 //                }
 //            }
 //        }
+        }
     }
-
-
 
     /**
      * construct ray from a {@link Camera} towards center of a pixel in a view plane

@@ -7,7 +7,7 @@ import primitives.Ray;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
 
 
     /**
@@ -51,14 +51,14 @@ public class Geometries implements Intersectable {
          * @return  immutable list of intersection points as  {@link Point} objects
          */
         @Override
-        public List<Point> findIntersections(Ray ray) {
-            List<Point> result = null;   // intersection points
+        public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+            List<GeoPoint> result = null;   // intersection points
 
             //for each geometry in intersect-able collection check intersection points
             for (var item: intersectables) {
 
                 // get intersection point for each specific item, (item can be either geometry/nested composite of geometries)
-                List<Point> itemList = item.findIntersections(ray);
+                List<GeoPoint> itemList = item.findGeoIntersectionsHelper(ray);
 
                 // points were found , add to composite's total intersection points list
                 if(itemList != null) {

@@ -25,7 +25,7 @@ public class RayTracerBasic extends RayTracerBase{
      */
     private Point findClosestIntersection(Ray ray) {
         // check if ray constructed through the pixel intersects any of geometries
-        List<Point> intersections = scene.getGeometries().findIntersections(ray);
+        List<Point> intersections = scene.getGeometries().findGeoIntersectionsHelper(ray);
 
         // return closest point if list is not empty
         return intersections == null ? null : ray.findClosestPoint(intersections);

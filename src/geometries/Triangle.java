@@ -20,9 +20,9 @@ public class Triangle extends Polygon{
     /**
 
      Creates a new Triangle object with the specified vertices.
-     @param p1 the first vertex of the triangle
-     @param p2 the second vertex of the triangle
-     @param p3 the third vertex of the triangle
+     @param pa the first vertex of the triangle
+     @param pb the second vertex of the triangle
+     @param pc the third vertex of the triangle
      */
     public Triangle(Point pa, Point pb, Point pc) {
         super(pa, pb, pc);
@@ -45,9 +45,9 @@ public class Triangle extends Polygon{
         return super.getNormal(point);
     }
 
-    public List<Point> findIntersections(Ray ray){
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray){
         // check if ray intersects plane containing the triangle
-        List<Point> result = plane.findIntersections(ray);
+        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray);
         // no intersections
         if (result == null)
             return null;

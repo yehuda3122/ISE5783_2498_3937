@@ -23,14 +23,14 @@ public class Sphere extends RadialGeometry{
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
 
         // ray starts at center point of sphere
         // return point on surface in direction of ray
         if (P0.equals(center)) {
-            return List.of( P0.add(v.scale(radius)));
+            return List.of(new GeoPoint(this, P0.add(v.scale(radius))));
         }
 
         // vector from ray origin to center point
@@ -67,17 +67,17 @@ public class Sphere extends RadialGeometry{
         if (t1 > 0 && t2 > 0 && distanceT1 && distanceT2) {
             Point P1 =P0.add(v.scale(t1));    //ray.getPoint(t1);
             Point P2 =P0.add(v.scale(t2));                      //ray.getPoint(t2);
-            return List.of(P1, P2);
+            return List.of(new GeoPoint(this,P1),new GeoPoint(this, P2));
         }
         // ray constructed inside sphere and intersect in back direction
         if (t1 > 0 && distanceT1) {
             Point P1 =P0.add(v.scale(t1));            //ray.getPoint(t1);
-            return List.of(P1);
+            return List.of(new GeoPoint(this,P1));
         }
         // ray constructed inside sphere and intersect in forward direction
         if (t2 > 0 && distanceT2) {
             Point P2 =P0.add(v.scale(t2));          //ray.getPoint(t2);
-            return List.of(P2);
+            return List.of(new GeoPoint(this,P2));
         }
         // no intersection points found - assurance return
         // code should not be reaching this point
