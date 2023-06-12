@@ -11,7 +11,7 @@ import static primitives.Util.isZero;
 public class Cylinder extends Tube {
 
     final public double height;
-    public Cylinder(double radius, double height,Ray axis) {
+    public Cylinder(double radius, double height,   Ray axis) {
         super(axis, radius);
         if (radius < 0 && height < 0)
             throw new IllegalArgumentException("height and radius must b greater then 0");
@@ -36,9 +36,14 @@ public class Cylinder extends Tube {
         return super.getNormal(point);
     }
 
+    /**
+     * find intersection points between ray and 3D cylinder
+     * @param ray ray towards the sphere
+     * @return immutable list containing 0/1/2 intersection points as {@link GeoPoint}s objects
+     */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-// origin point of cylinder (on bottom base)
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        // origin point of cylinder (on bottom base)
         Point basePoint = axis.getP0();
         // point across base point on top base
         Point topPoint = axis.getPoint(height);
@@ -46,23 +51,23 @@ public class Cylinder extends Tube {
         Vector vC = axis.getDir();
 
         // find intersection points of ray with bottom base of cylinder
-        List<Point> result= new LinkedList<>();
+        List<GeoPoint> result= new LinkedList<>();
         // crate plane that contains base point in it
         Plane basePlane= new Plane(basePoint,vC);
         // find intersection between ray and plane
-        List<Point> intersectionsBase = basePlane.findGeoIntersectionsHelper(ray);
+        List<GeoPoint> intersectionsBase = basePlane.findGeoIntersections(ray, maxDistance);
 
         // if intersections were found, check that point are actually on the base of the cylinder
         //if distance from base point to intersection point holds the equation ->  distance² < from radius²
         if(intersectionsBase!=null){
-            for (Point p:intersectionsBase) {
-                Point pt = p;
+            for (GeoPoint p:intersectionsBase) {
+                Point pt = p.point;
                 // intersection point is the base point itself
                 if(pt.equals(basePoint))
-                    result.add(basePoint);
+                    result.add(new GeoPoint(this , basePoint));
                     // intersection point is different to base point but is on the bottom base
                 else if(pt.subtract(basePoint).dotProduct(pt.subtract(basePoint)) < radius * radius)
-                    result.add(pt);
+                    result.add(new GeoPoint(this, pt));
             }
         }
 
@@ -70,28 +75,29 @@ public class Cylinder extends Tube {
         // crate plane that contains top point in it
         Plane topPlane= new Plane(topPoint,vC);
         // find intersection between ray and plane
-        List<Point> intersectionsTop=topPlane.findIntersections(ray);
+        List<GeoPoint> intersectionsTop=topPlane.findGeoIntersections(ray, maxDistance);
         // if intersections were found, check that point are actually on the base of the cylinder
         //if distance from top point to intersection point holds the equation ->  distance² < from radius²
         if(intersectionsTop!=null){
             for (var p:intersectionsTop) {
-                Point pt = p;
+                Point pt = p.point;
                 // intersection point is the top point itself
                 if(pt.equals(topPoint))
-                    result.add(topPoint);
+                    result.add(new GeoPoint(this, topPoint));
                     // intersection point is different to base point but is on the bottom base
                 else if(pt.subtract(topPoint).dotProduct(pt.subtract(topPoint)) < radius * radius)
-                    result.add( pt );
+                    result.add(new GeoPoint(this, pt));
             }
         }
 
         // if rsy intersects both bases , no other intersections possible - return the result list
-        if (result.size()==2)
+        if (result.size()==2) {
             return result;
+        }
 
         // use tube parent class function to find intersections with the cylinder represented
         // as an infinite tube
-        List<Point> intersectionsTube=super.findIntersections( ray );
+        List<GeoPoint> intersectionsTube = super.findGeoIntersectionsHelper(ray , maxDistance);
 
         // if intersection points were found check that they are within the finite cylinder's boundary
         // by checking if  scalar product fo direction vector with a vector from intersection point
@@ -99,9 +105,9 @@ public class Cylinder extends Tube {
         // vector from intersection point to top base point is negative
         if(intersectionsTube!=null){
             for (var p:intersectionsTube){
-                Point pt = p;
+                Point pt = p.point;
                 if(vC.dotProduct(pt.subtract(basePoint))>0 && vC.dotProduct(pt.subtract(topPoint)) < 0)
-                    result.add( pt );
+                    result.add(new GeoPoint(this, pt));
             }
         }
 

@@ -38,8 +38,13 @@ public class Tube extends RadialGeometry{
             return point.subtract(O).normalize();
     }
 
+    /**
+     * find intersection points between ray and 3D tube
+     * @param ray ray towards the sphere
+     * @return immutable list containing 0/1/2 intersection points as {@link GeoPoint}s objects
+     */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Vector v = ray.getDir();
         Vector vt = axis.getDir();
         Point pa = axis.getP0();
@@ -70,7 +75,7 @@ public class Tube extends RadialGeometry{
         // calculate (v,vt)
         vvt = v.dotProduct(vt);
 
-        Vector vMinusVt =null;
+        Vector vMinusVt = null;
         Vector delta = null;
 
         // scaling factor == 0 ->  A = v²
@@ -139,8 +144,8 @@ public class Tube extends RadialGeometry{
 
             // check that distance from ray origin to intersection points
             // is smaller than max distance parameter set by user
-            boolean distanceT1 = alignZero(t1) >= 0;
-            boolean distanceT2 = alignZero(t2) >= 0;
+            boolean distanceT1 = alignZero(t1 - maxDistance) <= 0;
+            boolean distanceT2 = alignZero(t2 - maxDistance) <= 0;
 
             // root> 0 indicates that scaling factor is in
             // forward direction of ray and , intersection occurs

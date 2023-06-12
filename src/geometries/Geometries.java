@@ -25,6 +25,7 @@ public class Geometries extends Intersectable {
          * constructor
          */
         public Geometries() {
+
             intersectables = new LinkedList<Intersectable>();
         }
 
@@ -42,6 +43,7 @@ public class Geometries extends Intersectable {
          * @param intersectables collection of geometries passed as parameters
          */
         public void  add( Intersectable... intersectables){
+
             Collections.addAll(this.intersectables, intersectables);
         }
 
@@ -51,14 +53,14 @@ public class Geometries extends Intersectable {
          * @return  immutable list of intersection points as  {@link Point} objects
          */
         @Override
-        public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
             List<GeoPoint> result = null;   // intersection points
 
             //for each geometry in intersect-able collection check intersection points
             for (var item: intersectables) {
 
                 // get intersection point for each specific item, (item can be either geometry/nested composite of geometries)
-                List<GeoPoint> itemList = item.findGeoIntersectionsHelper(ray);
+                List<GeoPoint> itemList = item.findGeoIntersections(ray, maxDistance);
 
                 // points were found , add to composite's total intersection points list
                 if(itemList != null) {

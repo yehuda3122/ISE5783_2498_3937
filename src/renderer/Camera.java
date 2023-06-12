@@ -480,8 +480,8 @@ public class Camera {
         int nX = imageWriter.getNx();
         int nY = imageWriter.getNy();
 
-        for (int i = 0; i <= nX; i++) {
-            for (int j = 0; j <= nY; j++) {
+        for (int i = 0; i < nX; i++) {
+            for (int j = 0; j < nY; j++) {
                 castRay(nX, nY, j, i);
             }
             //initialize thread progress reporter

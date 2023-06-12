@@ -21,6 +21,15 @@ import java.util.List;
  * @author Dan */
 public class PolygonTests {
 
+   Polygon square = new Polygon(
+           new Point(1, 0, 2),
+           new Point(4, 0, 2),
+           new Point(4, 3, 2),
+           new Point(1, 3, 2));
+
+   Plane pl = new Plane(new Point(0, 0, 2), new Point(1, 0, 2), new Point(0, 1, 2));
+   Ray ray;
+
    /** Test method for {@link geometries.Polygon#Polygon(primitives.Point...)}. */
    @Test
    public void testConstructor() {
@@ -28,43 +37,69 @@ public class PolygonTests {
 
       // TC01: Correct concave quadrangular with vertices in correct order
       try {
-         new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(-1, 1, 1));
+         new Polygon(
+                 new Point(0, 0, 1),
+                 new Point(1, 0, 0),
+                 new Point(0, 1, 0),
+                 new Point(-1, 1, 1));
       } catch (IllegalArgumentException e) {
          fail("Failed constructing a correct polygon");
       }
 
       // TC02: Wrong vertices order
       assertThrows(IllegalArgumentException.class, //
-                   () -> new Polygon(new Point(0, 0, 1), new Point(0, 1, 0), new Point(1, 0, 0), new Point(-1, 1, 1)), //
+                   () -> new Polygon(
+                           new Point(0, 0, 1),
+                           new Point(0, 1, 0),
+                           new Point(1, 0, 0),
+                           new Point(-1, 1, 1)), //
                    "Constructed a polygon with wrong order of vertices");
 
       // TC03: Not in the same plane
       assertThrows(IllegalArgumentException.class, //
-                   () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 2, 2)), //
+                   () -> new Polygon(
+                           new Point(0, 0, 1),
+                           new Point(1, 0, 0),
+                           new Point(0, 1, 0),
+                           new Point(0, 2, 2)), //
                    "Constructed a polygon with vertices that are not in the same plane");
 
       // TC04: Concave quadrangular
       assertThrows(IllegalArgumentException.class, //
-                   () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0),
-                                     new Point(0.5, 0.25, 0.5)), //
+                   () -> new Polygon(
+                           new Point(0, 0, 1),
+                           new Point(1, 0, 0),
+                           new Point(0, 1, 0),
+                           new Point(0.5, 0.25, 0.5)), //
                    "Constructed a concave polygon");
 
       // =============== Boundary Values Tests ==================
 
       // TC10: Vertex on a side of a quadrangular
       assertThrows(IllegalArgumentException.class, //
-                   () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0),
-                                     new Point(0, 0.5, 0.5)),
+                   () -> new Polygon(
+                           new Point(0, 0, 1),
+                           new Point(1, 0, 0),
+                           new Point(0, 1, 0),
+                           new Point(0, 0.5, 0.5)),
                    "Constructed a polygon with vertix on a side");
 
       // TC11: Last point = first point
       assertThrows(IllegalArgumentException.class, //
-                   () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 0, 1)),
+                   () -> new Polygon(
+                           new Point(0, 0, 1),
+                           new Point(1, 0, 0),
+                           new Point(0, 1, 0),
+                           new Point(0, 0, 1)),
                    "Constructed a polygon with vertice on a side");
 
       // TC12: Co-located points
       assertThrows(IllegalArgumentException.class, //
-                   () -> new Polygon(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 1, 0)),
+                   () -> new Polygon(
+                           new Point(0, 0, 1),
+                           new Point(1, 0, 0),
+                           new Point(0, 1, 0),
+                           new Point(0, 1, 0)),
                    "Constructed a polygon with vertice on a side");
 
    }
@@ -89,11 +124,6 @@ public class PolygonTests {
                     "Polygon's normal is not orthogonal to one of the edges");
    }
 
-   Polygon square = new Polygon(new Point(1, 0, 2), new Point(4, 0, 2), new Point(4, 3, 2),
-           new Point(1, 3, 2));
-
-   Plane pl = new Plane(new Point(0, 0, 2), new Point(1, 0, 2), new Point(0, 1, 2));
-   Ray ray;
 
    // ============ Equivalence Partitions Tests ==============
    @Test
@@ -101,6 +131,8 @@ public class PolygonTests {
       // TC01: Inside polygon
       ray = new Ray(new Point(2, 1, 0), new Vector(0, 0, 1));
       var d= square.findIntersections(ray);
+      //var n = square.getNormal(new Point(0,0,1));
+      //assertNotNull(d);
       assertEquals(List.of(new Point(2, 1, 2)), square.findIntersections(ray), "wrong intersection point");
    }
    @Test

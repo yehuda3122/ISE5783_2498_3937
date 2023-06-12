@@ -23,7 +23,7 @@ public class Sphere extends RadialGeometry{
     }
 
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
 
@@ -59,8 +59,8 @@ public class Sphere extends RadialGeometry{
 
         // check that distance from ray origin to intersection points
         // is smaller than max distance parameter set by user
-        boolean distanceT1 = t1 > 0;
-        boolean distanceT2 = t2 > 0;
+        boolean distanceT1 = alignZero(t1 - maxDistance) <= 0;
+        boolean distanceT2 = alignZero(t2 - maxDistance) <= 0;
 
         // ray constructed outside sphere
         // two intersection points

@@ -2,7 +2,11 @@ package scene;
 
 import geometries.Geometries;
 import lighting.AmbientLight;
+import lighting.LightSource;
 import primitives.Color;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Scene {
     private final String name;
@@ -10,6 +14,8 @@ public class Scene {
     public Color background;
     public AmbientLight ambientLight = AmbientLight.NONE;
     public Geometries geometries = new Geometries();
+
+    public List<LightSource> lights = new LinkedList<>();
 
     /**
      * constructor (uses builder pattern)
@@ -20,7 +26,7 @@ public class Scene {
         background = builder.background;
         geometries = builder.geometries;
         ambientLight = builder.ambientLight;
-//        lights = builder.lights;
+        lights = builder.lights;
     }
     /**
      * getter for name field
@@ -54,13 +60,18 @@ public class Scene {
         return geometries;
     }
 
-//    /**
-//     * getter for lights field
-//     * @return collection of {@link LightSource} in scene
-//     */
-//    public List<LightSource> getLights() {
-//        return lights;
-//    }
+    public Scene setLights(List<LightSource> lights) {
+        this.lights = lights;
+        return this;
+    }
+
+    /**
+     * getter for lights field
+     * @return collection of {@link LightSource} in scene
+     */
+    public List<LightSource> getLights() {
+        return lights;
+    }
 
     /**
      * inner class, responsible to create new instances of Scene objects
@@ -93,7 +104,7 @@ public class Scene {
         /**
          * light sources of scene
          */
-//        private List<LightSource> lights = new LinkedList<>();
+        private List<LightSource> lights = new LinkedList<>();
 
         /**
          * constructor (only name parameter is mandatory at instantiation)
@@ -136,15 +147,15 @@ public class Scene {
         }
 
 
-//        /**
-//         * setter for light sources in scene
-//         * @param lights collection of light objects implementing {@link LightSource} interface
-//         * @return this {@link SceneBuilder} instance
-//         */
-//        public SceneBuilder setLights(List<LightSource> lights) {
-//            this.lights = lights;
-//            return this;
-//        }
+        /**
+         * setter for light sources in scene
+         * @param lights collection of light objects implementing {@link LightSource} interface
+         * @return this {@link SceneBuilder} instance
+         */
+        public SceneBuilder setLights(List<LightSource> lights) {
+            this.lights = lights;
+            return this;
+        }
 
         /**
          * build function for builder pattern - initializes new Scene object

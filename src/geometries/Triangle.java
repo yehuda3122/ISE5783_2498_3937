@@ -1,7 +1,7 @@
 package geometries;
 
 import primitives.*;
-
+import static primitives.Util.*;
 import java.util.List;
 
 import static primitives.Util.isZero;
@@ -45,11 +45,17 @@ public class Triangle extends Polygon{
         return super.getNormal(point);
     }
 
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray){
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
         // check if ray intersects plane containing the triangle
-        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray);
+        List<GeoPoint> result = plane.findGeoIntersections(ray);
         // no intersections
         if (result == null)
+            return null;
+
+        //check that intersection point is closer to ray origin than
+        // max distance parameter
+        double distance = result.get(0).point.distance(ray.getP0());
+        if(alignZero(distance-maxDistance)>0)
             return null;
 
         // check if intersection points are in Triangle
@@ -88,7 +94,7 @@ public class Triangle extends Polygon{
             return null;
 
         // ray intersects triangle
-        return List.of(result.get(0));
+        return List.of(new GeoPoint(this, result.get(0).point));
 
     }
 
