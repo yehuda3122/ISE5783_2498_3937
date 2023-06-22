@@ -13,7 +13,7 @@ public class Ray {
     /**
      * delta used to move a ray origin point by a small margin
      */
-    private static final double EPS = 0.1;
+    private static final double DELTA = 0.1;
     public Ray(Point point,Vector vector) {
         p0 = point;
         dir = vector.normalize();
@@ -29,7 +29,7 @@ public class Ray {
         if (dir.xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("Vector (0,0,0) not valid");
 
-        Vector epsVector = normal.scale(normal.dotProduct(dir) >0 ? EPS : - EPS);
+        Vector epsVector = normal.scale(normal.dotProduct(dir) >0 ? DELTA : - DELTA);
         this.p0=p.add(epsVector);
         this.dir = dir.normalize();
     }

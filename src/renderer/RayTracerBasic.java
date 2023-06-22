@@ -35,7 +35,6 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private boolean softShadow = false;
 
-    private static final double DELTA = 0.1;
 
     /**
      * constructor
@@ -248,19 +247,47 @@ public class RayTracerBasic extends RayTracerBase {
         // loop through all light sources in scene
 
         var lights = scene.getLights();
-        for (var lightSource : lights) {
-            // l
-            Vector l = lightSource.getL(intersection.point);
-            // l.dorProduct(n)
-            double nl = alignZero(n.dotProduct(l));
-            // check that light direction is towards shape and not behind
-            if (nl * nv > 0) { // sign(nl) == sing(nv)
-                if (unshaded(intersection,l,n,lightSource)) {
-                    Color lightIntensity = lightSource.getIntensity(intersection.point);
-                    // (Kd * |l.dorProduct(n)|) * Il
-                    color = color.add(calcDiffusive(kD, nl, lightIntensity),
-                            // (Ks * max(0 ,(-v).dotProduct(r)) ** nShinines ) * Il
-                            calcSpecular(kS, nl, l, n, v, nShininess, lightIntensity));
+        if (softShadow) {
+            for (var lightSource : lights) {
+                Color colorBeam = Color.BLACK;
+                var vectors = lightSource.getListL(intersection.point);
+                for (var l:vectors) {
+
+                    // l.dorProduct(n)
+                    double nl = alignZero(n.dotProduct(l));
+                    // check that light direction is towards shape and not behind
+                    if (nl * nv > 0) { // sign(nl) == sing(nv)
+
+                        Double3 ktr = transparency(intersection, lightSource, l, n);
+                        if (ktr.scale(k).greaterThan(MIN_CALC_COLOR_K)) {
+                            Color lightIntensity = lightSource.getIntensity(intersection.point).scale(ktr);
+                            // (Kd * |l.dorProduct(n)|) * Il
+                            colorBeam = colorBeam.add(calcDiffusive(kD, nl, lightIntensity),
+                                    // (Ks * max(0 ,(-v).dotProduct(r)) ** nShinines ) * Il
+                                    calcSpecular(kS, nl, l, n, v, nShininess, lightIntensity));
+                        }
+                    }
+                }
+                color=color.add(colorBeam.reduce(vectors.size()));
+            }
+        }
+        else {
+            for (var lightSource : lights) {
+                // l
+                Vector l = lightSource.getL(intersection.point);
+                // l.dorProduct(n)
+                double nl = alignZero(n.dotProduct(l));
+                // check that light direction is towards shape and not behind
+                if (nl * nv > 0) { // sign(nl) == sing(nv)
+
+                    Double3 ktr = transparency(intersection, lightSource, l, n);
+                    if (ktr.scale(k).greaterThan(MIN_CALC_COLOR_K)) {
+                        Color lightIntensity = lightSource.getIntensity(intersection.point).scale(ktr);
+                        // (Kd * |l.dorProduct(n)|) * Il
+                        color = color.add(calcDiffusive(kD, nl, lightIntensity),
+                                // (Ks * max(0 ,(-v).dotProduct(r)) ** nShinines ) * Il
+                                calcSpecular(kS, nl, l, n, v, nShininess, lightIntensity));
+                    }
                 }
             }
         }
@@ -325,23 +352,33 @@ public class RayTracerBasic extends RayTracerBase {
      * @param light {@link LightSource} lighting towards the geometry
      * @return true if unshaded ,else  false.
      */
-    /**
-     * ToDo
-     * @param gp
-     * @param l
-     * @param n
-     * @return
-     */
-    private boolean unshaded(GeoPoint gp, Vector l, Vector n, LightSource light){
-        Vector lightDirection = l.scale(-1); // from point to light source
+    private boolean unshaded(GeoPoint gp, Vector l, Vector n, LightSource light) {
+        // create a vector by scaling  light direction vector to opposite direction
+        // now originating from point towards light
+        Vector lightScaled = l.scale(-1);
+        // construct a new ray using the scaled vector from the point towards ray
+        // slightly removed from original point by epsilon (in Ray class)
+        Ray shadowRay = new Ray(gp.point, n, lightScaled);
+        // get distance from the light to the point
+        double lightDistance = light.getDistance(shadowRay.getP0());
+        // check if new ray intersect a geometry between point and the light source
+        // further objects behind the light are avoided by distance parameter
+        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(shadowRay, lightDistance);
+        // no intersections were found - point is not shaded
+        if (intersections == null)
+            return true;
+        //iterate through intersection points: if they are closer to point than the light
+        // and the material of the geometry of intersection is not transparent
+        // point is shaded return false
+        for (var geoPoint : intersections) {
+            if (alignZero(geoPoint.point.distance(gp.point) - lightDistance) <= 0
+                    && geoPoint.geometry.getMaterial().kT.equals(Double3.ZERO)) {
+                return false;
+            }
+        }
+        // all geometries intersected are transparent - point is not shaded - return true
+        return true;
 
-        Vector epsVector = n.scale(n.dotProduct(lightDirection) >=0 ? DELTA : -DELTA);
-        Point point = gp.point.add(epsVector);
-
-        Ray lightRay = new Ray(point, lightDirection);
-        double distance = light.getDistance(point);
-        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(lightRay,distance);
-        return intersections ==null;
     }
 
     /**
