@@ -8,13 +8,33 @@ import primitives.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Graphical scene
+ */
 public class Scene {
+    /**
+     * name of scene
+     */
     private final String name;
 
+    /**
+     * background color of scene
+     */
     public Color background;
-    public AmbientLight ambientLight = AmbientLight.NONE;
+
+    /**
+     * basic ambient lighting of scene
+     */
+    public AmbientLight ambientLight = new AmbientLight();
+
+    /**
+     * collection of graphical geometric shapes in the scene
+     */
     public Geometries geometries = new Geometries();
 
+    /**
+     * light sources of scene
+     */
     public List<LightSource> lights = new LinkedList<>();
 
     /**
@@ -33,6 +53,7 @@ public class Scene {
      * @return name of scene
      */
     public String getName() {
+
         return name;
     }
 
@@ -41,6 +62,7 @@ public class Scene {
      * @return basic background {@link  Color} of scene
      */
     public Color getBackground() {
+
         return background;
     }
 
@@ -49,6 +71,7 @@ public class Scene {
      * @return basic {@link  AmbientLight} of scene
      */
     public AmbientLight getAmbientLight() {
+
         return ambientLight;
     }
 
@@ -57,6 +80,7 @@ public class Scene {
      * @return collection of {@link Geometries} in scene
      */
     public Geometries getGeometries() {
+
         return geometries;
     }
 
@@ -94,7 +118,7 @@ public class Scene {
         /**
          * basic ambient lighting of scene
          */
-        private  AmbientLight ambientLight =  AmbientLight.NONE;
+        private  AmbientLight ambientLight =  new AmbientLight();
 
         /**
          * collection of graphical geometric shapes in the scene
@@ -111,6 +135,7 @@ public class Scene {
          * @param name name of scene
          */
         public SceneBuilder(String name) {
+
             this.name = name;
         }
 

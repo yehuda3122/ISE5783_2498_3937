@@ -6,9 +6,20 @@ import primitives.Vector;
 
 import java.util.List;
 
+/**
+ * light source object with direction to the light (no attenuation)
+ */
 public class DirectionalLight extends Light implements LightSource{
+    /**
+     * direction of the light
+     */
     private Vector direction;
 
+    /**
+     * constructor
+     * @param intensity {@link Color} of intensity of the light
+     * @param direction direction {@link Vector} of beam
+     */
     public DirectionalLight(Color intensity, Vector direction) {
         super(intensity);
         this.direction = direction.normalize();
@@ -21,6 +32,7 @@ public class DirectionalLight extends Light implements LightSource{
      */
     @Override
     public Color getIntensity(Point p) {
+
         return getIntensity();
     }
 
@@ -31,10 +43,12 @@ public class DirectionalLight extends Light implements LightSource{
      */
     @Override
     public Vector getL(Point p) {
+
         return direction;
     }
 
     public List<Vector> getListL(Point p){
+
         return List.of(getL(p));
     }
 

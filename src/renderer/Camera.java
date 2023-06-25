@@ -9,15 +9,50 @@ import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
 
+/**
+ * camera in 3D space with view plane
+ */
 public class Camera {
+
+    //region Fields
+
+    // static data fields
+
+    /**
+     * camera's position point in 3D space
+     */
     private Point p0;
+    /**
+     * vector pointing towards view plane (-Z axis)
+     */
     private Vector vTo;
+    /**
+     * vector pointing up ( Y axis)
+     */
     private Vector vUp;
+    /**
+     * vector pointing right ( X axis)
+     */
     private Vector vRight;
+    /**
+     * distance between view plane from camera
+     */
     private double distance;
+    /**
+     * width of view plane "Physical" size
+     */
     private double width;
+    /**
+     * height of view plane "Physical" size
+     */
     private double height;
+    /**
+     * image writing to file functionality object
+     */
     private ImageWriter imageWriter = null;
+    /**
+     * calculate color of pixel functionality object
+     */
     private RayTracerBase rayTracerBase;
 
     private Camera(CameraBuilder camBuilder) {
@@ -337,6 +372,7 @@ public class Camera {
          * @return new {@link Camera} object
          */
         public Camera build() {
+
             return new Camera(this);
         }
 
@@ -532,8 +568,8 @@ public class Camera {
         // calculate "size" of each pixel -
         // height per pixel = total "physical" height / number of rows
         // width per pixel = total "physical" width / number of columns
-        double Ry = (double) height / nX;
-        double Rx = (double) width / nY;
+        double Ry = (double) height / nY;
+        double Rx = (double) width / nX;
 
         // set result point to middle of view plane
         Point Pij = Pc;

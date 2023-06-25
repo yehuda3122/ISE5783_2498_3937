@@ -19,6 +19,7 @@ public class Sphere extends RadialGeometry{
 
     @Override
     public Vector getNormal(Point point) {
+
         return point.subtract(center).normalize();
     }
 
@@ -30,7 +31,7 @@ public class Sphere extends RadialGeometry{
         // ray starts at center point of sphere
         // return point on surface in direction of ray
         if (P0.equals(center)) {
-            return List.of(new GeoPoint(this, P0.add(v.scale(radius))));
+            return List.of(new GeoPoint(this, ray.getPoint(radius)));
         }
 
         // vector from ray origin to center point
@@ -65,8 +66,8 @@ public class Sphere extends RadialGeometry{
         // ray constructed outside sphere
         // two intersection points
         if (t1 > 0 && t2 > 0 && distanceT1 && distanceT2) {
-            Point P1 =P0.add(v.scale(t1));    //ray.getPoint(t1);
-            Point P2 =P0.add(v.scale(t2));                      //ray.getPoint(t2);
+            Point P1 =ray.getPoint(t1);    //ray.getPoint(t1);
+            Point P2 =ray.getPoint(t2);                      //ray.getPoint(t2);
             return List.of(new GeoPoint(this,P1),new GeoPoint(this, P2));
         }
         // ray constructed inside sphere and intersect in back direction

@@ -18,38 +18,76 @@ public class Material {
      *  coefficient for reflectiveness level of material
      */
     public Double3 kR=Double3.ZERO;
+    /**
+     * shininess level of geometry
+     */
     public int nShininess;
 
+    /**
+     * setter for Kd field (Builder pattern style)
+     * @param kD coefficient value of diffusion of light on material
+     * @return this instance of object
+     */
     public Material setKd(Double3 kD) {
         this.kD = kD;
         return this;
     }
 
+    /**
+     * setter for Kd field (Builder pattern style)
+     * @param kD coefficient value of diffusion of light on material
+     * @return this instance of object
+     */
     public Material setKd(double kD) {
         this.kD = new Double3(kD);
         return this;
     }
 
+    /**
+     * setter for kT field (Builder pattern style)
+     * @param kT coefficient value of transparency level of material
+     * @return  this instance of object
+     */
     public Material setkT(double kT) {
         this.kT = new Double3(kT);
         return this;
     }
 
+    /**
+     * setter for kR field (Builder pattern style)
+     * @param kR coefficient value of reflectiveness level of material
+     * @return  this instance of object
+     */
     public Material setkR(double kR) {
         this.kR = new Double3(kR);
         return this;
     }
 
+    /**
+     * setter for Ks field (Builder pattern style)
+     * @param kS coefficient value of specular level of material
+     * @return this instance of object
+     */
     public Material setKs(Double3 kS) {
         this.kS = kS;
         return this;
     }
 
+    /**
+     * setter for Ks field (Builder pattern style)
+     * @param kS coefficient value of specular level of material
+     * @return this instance of object
+     */
     public Material setKs(double kS) {
         this.kS = new Double3(kS);
         return this;
     }
 
+    /**
+     * setter for nShininess field (Builder pattern style)
+     * @param nShininess shininess level of geometry
+     * @return this instance of object
+     */
     public Material setnShininess(int nShininess) {
         this.nShininess = nShininess;
         return this;

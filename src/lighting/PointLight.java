@@ -2,6 +2,7 @@ package lighting;
 
 import geometries.Sphere;
 import primitives.Color;
+import primitives.Double3;
 import primitives.Point;
 import primitives.Vector;
 
@@ -10,36 +11,94 @@ import java.util.List;
 
 public class PointLight extends Light implements LightSource{
 
+    /**
+     * attenuation coefficient
+     */
+    private Double3 kC = Double3.ONE;
+    /**
+     * attenuation coefficient depending on distance
+     */
+    private Double3 kL = Double3.ZERO;
+    /**
+     * attenuation coefficient depending on distance²
+     */
+    private Double3 kQ = Double3.ZERO;
+
+    /**
+     * position {@link Point} of light source in 3D space
+     */
     private Point position;
-    private double KC = 1, KL = 0, KQ = 0;
 
     /**
      * size of radius around the light to create soft shadows
      */
     private Double radius;
 
+    /**
+     * constructor
+     *
+     * @param intensity {@link Color} of intensity of light
+     * @param position  position {@link Point} of the light object
+     */
     public PointLight(Color intensity, Point position) {
         super(intensity);
         this.position = position;
     }
 
-    public PointLight setPosition(Point position) {
+    /**
+     * constructor
+     *
+     * @param intensity {@link Color} of intensity of light
+     * @param position  position {@link Point} of the light object
+     * @param radius    size of radius around the light for soft shadow calculations
+     */
+    public PointLight(Color intensity, Point position, Double radius) {
+        super(intensity);
         this.position = position;
+        this.radius = radius;
+    }
+
+    /**
+     * setter for radius field
+     *
+     * @param radius size of the radius
+     * @return this instance of object
+     */
+    public PointLight setRadius(Double radius) {
+        this.radius = radius;
         return this;
     }
 
-    public PointLight setKC(double KC) {
-        this.KC = KC;
+    /**
+     * setter for kC field (Builder pattern style)
+     *
+     * @param kC attenuation coefficient
+     * @return this instance of object
+     */
+    public PointLight setkC(double kC) {
+        this.kC = new Double3(kC);
         return this;
     }
 
-    public PointLight setKL(double KL) {
-        this.KL = KL;
+    /**
+     * setter for kL field (Builder pattern style)
+     *
+     * @param kL coefficient for attenuation depending on distance
+     * @return this instance of object
+     */
+    public PointLight setKL(double kL) {
+        this.kL = new Double3(kL);
         return this;
     }
 
-    public PointLight setKQ(double KQ) {
-        this.KQ = KQ;
+    /**
+     * setter for kQ field (Builder pattern style)
+     *
+     * @param kQ coefficient for attenuation depending on distance²
+     * @return this instance of object
+     */
+    public PointLight setKQ(double kQ) {
+        this.kQ = new Double3(kQ);
         return this;
     }
 
@@ -56,7 +115,7 @@ public class PointLight extends Light implements LightSource{
         // calculate distance from light to point
         double distance = p.distance(position);
         // calculate denominator
-        double factor = (KC + KL * distance) + KQ * (distance * distance);
+        Double3 factor = kC.add(kL.scale(distance)).add(kQ.scale(distance * distance));
         // scale color by 1/denominator
         Color color = getIntensity().reduce(factor);
         return color;
@@ -126,6 +185,7 @@ public class PointLight extends Light implements LightSource{
      */
     @Override
     public double getDistance(Point p) {
+
         return position.distance(p);
     }
 }

@@ -416,8 +416,7 @@ public class RayTracerBasic extends RayTracerBase {
         double lightDistance = light.getDistance(shadowRay.getP0());
         // check if new ray intersect a geometry between point and the light source
         // further objects behind the light are avoided by distance parameter
-//        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(shadowRay, lightDistance);
-        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(shadowRay);
+        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(shadowRay, lightDistance);
         // point is not shaded - return transparency level of 1
         if (intersections == null)
             return Double3.ONE;
