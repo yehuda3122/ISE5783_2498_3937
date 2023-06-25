@@ -15,10 +15,11 @@ public class Vector extends Point {
      * @throws IllegalArgumentException if the x, y, and z coordinates are all zero
      */
     public Vector(double x, double y, double z) {
-        super(x, y, z);
-        if (xyz.equals(Double3.ZERO)) {
-            throw new IllegalArgumentException("vector cannot be ZERO");
-        }
+        this(new Double3(x,y,z));
+//        super(x, y, z);
+//        if (xyz.equals(Double3.ZERO)) {
+//            throw new IllegalArgumentException("vector cannot be ZERO");
+//        }
     }
 
     /**
@@ -26,8 +27,9 @@ public class Vector extends Point {
      *
      * @param double3 the Double3 object containing the x, y, and z coordinates of the vector
      */
-    Vector(Double3 double3) {
-        this(double3.d1, double3.d2, double3.d3);
+    public Vector(Double3 double3) {
+        super((double3));
+//        this(double3.d1, double3.d2, double3.d3);
     }
 
     /**

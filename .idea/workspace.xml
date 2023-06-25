@@ -4,24 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="in the middle defining renderImage">
+    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="fixing bug in triangle reflection tests">
+      <change afterPath="$PROJECT_DIR$/unitTests/renderer/Backgammon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesPoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightTrianglesPoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpot.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightTrianglesSpot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/reflectionTwoSpheresMirrored.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/reflectionTwoSpheresMirrored.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/AmbientLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/Light.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/Light.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/LightSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/SpotLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/SpotLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/ReflectionRefractionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/ReflectionRefractionTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +82,7 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in ISE5783_2498_3937">
+  <component name="RunManager" selected="JUnit.Backgammon.gameTest">
     <configuration name="All in ISE5783_2498_3937" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_2498_3937" />
       <option name="PACKAGE_NAME" value="" />
@@ -103,17 +91,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReflectionRefractionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Backgammon.gameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_2498_3937" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lighting.*" />
+          <option name="PATTERN" value="renderer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lighting" />
-      <option name="MAIN_CLASS_NAME" value="lighting.ReflectionRefractionTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.Backgammon" />
+      <option name="METHOD_NAME" value="gameTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -129,6 +118,22 @@
       <option name="PACKAGE_NAME" value="lighting" />
       <option name="MAIN_CLASS_NAME" value="lighting.ReflectionRefractionTests" />
       <option name="METHOD_NAME" value="reflectionIntegrationTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReflectionRefractionTests.reflectionIntegrationTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_2498_3937" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lighting.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lighting" />
+      <option name="MAIN_CLASS_NAME" value="lighting.ReflectionRefractionTests" />
+      <option name="METHOD_NAME" value="reflectionIntegrationTest1" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -150,28 +155,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShadowTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_2498_3937" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lighting.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lighting" />
-      <option name="MAIN_CLASS_NAME" value="lighting.ShadowTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Backgammon.gameTest" />
+        <item itemvalue="JUnit.ReflectionRefractionTests.reflectionIntegrationTest1" />
         <item itemvalue="JUnit.All in ISE5783_2498_3937" />
         <item itemvalue="JUnit.ReflectionRefractionTests.reflectionIntegrationTest" />
         <item itemvalue="JUnit.ReflectionRefractionTests.twoSpheres" />
-        <item itemvalue="JUnit.ReflectionRefractionTests" />
-        <item itemvalue="JUnit.ShadowTests" />
       </list>
     </recent_temporary>
   </component>
@@ -240,7 +230,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686588262060</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="fixing bug in triangle reflection tests">
+      <created>1687681746879</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687681746879</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -264,7 +261,8 @@
     <MESSAGE value="implement camaraIntegrationsTest and function" />
     <MESSAGE value="in the middle defining renderImage" />
     <MESSAGE value="starting stage 7" />
-    <option name="LAST_COMMIT_MESSAGE" value="starting stage 7" />
+    <MESSAGE value="fixing bug in triangle reflection tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing bug in triangle reflection tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

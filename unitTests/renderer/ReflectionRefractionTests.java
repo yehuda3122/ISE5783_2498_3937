@@ -125,6 +125,61 @@ public class ReflectionRefractionTests {
    }
 
 
+   @Test
+   public void reflectionIntegrationTest1(){
+      List<LightSource> lights = new LinkedList<>();
+      lights.add(new SpotLight(new Color(black), new Point(-25,-100,100), new Vector(-50,75,-100)).setKL(0.0004).setKQ(0.2));
+      lights.add(new DirectionalLight(new Color(blue),new Vector(-90,0,-100)));
+      lights.add(new SpotLight(new Color(700, 400, 400), new Point(-25, -100, 100), new Vector(-50, 75, -100)) //
+              .setKL(4E-5).setKQ(2E-5));
+      lights.add(new SpotLight(new Color(BLUE), new Point(0, -25, 100), new Vector(-90, 0, -100)) //
+              .setKL(4E-5).setKQ(2E-5));
+//      lights.add(new SpotLight(new Color(WHITE),new Point(-50,30,0),new Vector(0,-1,0)).setKL(0.0004).setKQ(0.0000006));
+      Scene scene = new Scene.SceneBuilder("Test Scene")
+              .setGeometries(new Geometries(
+                      new Polygon(new Point(-100,0,0),new Point(-50,0,0),new Point(-50,-50,0),new Point(-100,-50,0))
+                              .setEmission(new Color(green))
+                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3)),
+                      new Polygon(new Point(-100,0,-10),new Point(-50,0,-10),new Point(-50,-50,-10),new Point(-100,-50,-10))
+                              .setEmission(new Color(green))
+                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.5)),
+                      new Polygon(new Point(-100,0,0),new Point(-50,0,0),new Point(-50,0,-10),new Point(-100,0,-10))
+                              .setEmission(new Color(yellow))
+                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.5)),
+                      new Polygon(new Point(-100,0,0),new Point(-100,-50,0),new Point(-100,-50,-10),new Point(-100,0,-10))
+                              .setEmission(new Color(yellow))
+                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.5)),
+                      new Polygon(new Point(-50,0,0),new Point(-50,-50,0),new Point(-50,-50,-10),new Point(-50,0,-10))
+                              .setEmission(new Color(yellow))
+                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.5)),
+                      new Polygon(new Point(-100,-50,0),new Point(-50,-50,0),new Point(-50,-50,-10),new Point(-100,-50,-10))
+                              .setEmission(new Color(yellow))
+                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.5)),
+//                      new Sphere(new Point(-75,-25,0), 10).setEmission(new Color(darkGray))
+//                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.5)),
+                      new Cylinder(20,5,new Ray(new Point(-75,-25,0),new Vector(0,0,1))).
+                              setEmission(new Color(orange))
+                              .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.1)),
+                      new Polygon(new Point(-140,10,-10),new Point(-140,-60,-10),new Point(-140,-60,40),new Point(-140,10,40))
+                              .setEmission(new Color(LIGHT_GRAY))
+                              .setMaterial(new Material().setKd(0.001).setKs(0.2).setnShininess(80).setkT(1).setkR(0.3))
+
+              ))
+              .setBackground(new Color(255,255,255))
+              .setLights(lights)
+              .setBackground(new Color(0,102d,102d))
+              .build();
+
+      ImageWriter imageWriter = new ImageWriter("refractionIntegration55", 600, 600);
+      Camera camera = new Camera.CameraBuilder(new Point(100, -25, 100), new Vector(-150, 0, -100), new Vector(-1, 0,1.5 )) //
+              .setVPSize(200, 200)
+              .setVPDistance(200)
+              .setImageWriter(imageWriter) //
+              .setRayTracerBase(new RayTracerBasic(scene))
+              .build();//
+      camera.renderImage(); //
+      camera.writeToImage();
+   }
    /**
     * Produce a picture of two spheres and a cylinder - includes all effects
     * transparency and reflectiveness

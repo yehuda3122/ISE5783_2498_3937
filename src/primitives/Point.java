@@ -68,6 +68,7 @@ public class Point {
      */
     @Override
     public int hashCode() {
+
         return Objects.hash(xyz);
     }
 
@@ -77,6 +78,7 @@ public class Point {
      */
     @Override
     public String toString() {
+
         return "Point" + super.toString();
     }
 
@@ -105,6 +107,11 @@ public class Point {
     }
 
     public Vector subtract(Point p1) {
-        return new Vector(xyz.subtract(p1.xyz));
+
+//        return new Vector(xyz.subtract(p1.xyz));
+        Double3 result= xyz.subtract(p1.xyz);
+        if(result.equals(Double3.ZERO))
+            throw new IllegalArgumentException(("resulting of subtract: vector (0,0,0) not allowed"));
+        return new Vector(result);
     }
 }
