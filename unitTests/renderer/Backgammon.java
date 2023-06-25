@@ -84,6 +84,30 @@ public class Backgammon {
         Geometry U_border_4_border_right = borders(-17.5, 500, 0, -312, 500, 0, -312, 500, 10, -17.5, 500, 10);
         Geometry U_border_4_border_left = borders(-17.5, 487.5, 0, -312, 487.5, 0, -312, 487.5, 10, -17.5, 487.5, 10);
 
+        Geometry ML_border_5_buttom = borders(-325, 0, 0, -337.5, 0, 0, -337.5, 500, 0, -325, 500, 0);
+        Geometry ML_border_5_border_top = borders(-325, 0, 10, -337.5, 0, 10, -337.5, 500, 10, -325, 500, 10);
+        Geometry ML_border_5_border_right = borders(-325, 0, 0, -325, 0, 10, -325, 500, 10, -325, 500, 0);
+        Geometry ML_border_5_border_left = borders(-337.5, 0, 0, -337.5, 0, 10, -337.5, 500, 10, -337.5, 500, 0);
+        Geometry ML_border_5_border_down = borders(-325, 0, 0, -337.5, 0, 0, -337.5, 0, 10, -325, 0, 10);
+        Geometry ML_border_5_border_up = borders(-325, 500, 0, -337.5, 500, 0, -337.5, 500, 10, -325, 500, 10);
+
+        Geometry LD_border_2_buttom = borders(-325, 0, 0, -642.5, 0, 0, -642.5, 12.5, 0, -325, 12.5, 0);
+        Geometry LD_border_2_border_top = borders(-325, 0, 10, -642.5, 0, 10, -642.5, 12.5, 10, -325, 12.5, 10);
+        Geometry LD_border_2_border_right = borders(-325, 12.5, 0, -642.5, 12.5, 0, -642.5, 12.5, 10, -325, 12.5, 10);
+        Geometry LD_border_2_border_left = borders(-325, 0, 0, -642.5, 0, 0, -642.5, 0, 10, -325, 0, 10);
+
+        Geometry LL_border_5_buttom = borders(-642.5, 0, 0, -655, 0, 0, -665, 500, 0, -642.5, 500, 0);
+        Geometry LL_border_5_border_top = borders(-642.5, 0, 10, -655, 0, 10, -665, 500, 10, -642.5, 500, 10);
+        Geometry LL_border_5_border_right = borders(-642.5, 0, 0, -642.5, 0, 10, -642.5, 500, 10, -642.5, 500, 0);
+        Geometry LL_border_5_border_left = borders(-655, 0, 0, -655, 0, 10, -655, 500, 10, -655, 500, 0);
+        Geometry LL_border_5_border_down = borders(-642.5, 0, 0, -655, 0, 0, -655, 0, 10, -642.5, 0, 10);
+        Geometry LL_border_5_border_up = borders(-642.5, 500, 0, -655, 500, 0, -655, 500, 10, -642.5, 500, 10);
+
+        Geometry LU_border_4_buttom = borders(-337.5, 487.5, 0, -642.5, 487.5, 0, -642.5, 500, 0, -337.5, 500, 0);
+        Geometry LU_border_4_border_top = borders(-337.5, 487.5, 10, -642.5, 487.5, 10, -642.5, 500, 10, -337.5, 500, 10);
+        Geometry LU_border_4_border_right = borders(-337.5, 500, 0, -642.5, 500, 0, -642.5, 500, 10, -337.5, 500, 10);
+        Geometry LU_border_4_border_left = borders(-337.5, 487.5, 0, -642.5, 487.5, 0, -642.5, 487.5, 10, -337.5, 487.5, 10);
+
         Scene scene = new Scene.SceneBuilder("game")
                 .setGeometries(new Geometries(
                         bord,
@@ -112,7 +136,27 @@ public class Backgammon {
                         U_border_4_buttom,
                         U_border_4_border_top,
                         U_border_4_border_right,
-                        U_border_4_border_left
+                        U_border_4_border_left,
+                        ML_border_5_buttom,
+                        ML_border_5_border_top,
+                        ML_border_5_border_right,
+                        ML_border_5_border_left,
+                        ML_border_5_border_down,
+                        ML_border_5_border_up,
+                        LD_border_2_buttom,
+                        LD_border_2_border_top,
+                        LD_border_2_border_right,
+                        LD_border_2_border_left,
+                        LL_border_5_buttom,
+                        LL_border_5_border_top,
+                        LL_border_5_border_right,
+                        LL_border_5_border_left,
+                        LL_border_5_border_down,
+                        LL_border_5_border_up,
+                        LU_border_4_buttom,
+                        LU_border_4_border_top,
+                        LU_border_4_border_right,
+                        LU_border_4_border_left
                         ))
                 .setBackground(new Color(255, 255, 255))
                 .setLights(lights)
