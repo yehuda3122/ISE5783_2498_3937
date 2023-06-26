@@ -76,6 +76,17 @@ public class Backgammon {
         return cilinders;
     }
 
+    public List<Geometry> dice_5_dots(double a, double b, double c){
+        List<Geometry> cilinders = new LinkedList<>();
+        for(int i = 0; i < 2; i++){
+                    cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 8+ 3,b + 3,c),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+                    cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 8+ 3,b + 15,c),new Vector(0,0,1))).setEmission(new Color(black))
+                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+        }
+        cilinders.add(new Cylinder(2,1,new Ray(new Point(a+9,b+9,c),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+        return cilinders;
+    }
+
     public List<Geometry> white_pices_m(double a, double b, double c, int amount){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < amount; i++){
@@ -170,20 +181,38 @@ public class Backgammon {
         List<Geometry> five_upper_white_pices = white_pices_p(-293, 467-449+13, 1 , 5);
         List<Geometry> three_upper_white_pices = white_pices_p(-420, 467-449+13, 1 , 3);
 
-        Geometry dice_1_up = dice(-172,246,8,-191,246,8,-191,265,8,-172,265,8);
-        Geometry dice_1_right = dice(-172,246,8,-191,265,8,-191,265,1,-172,246,1);
-        Geometry dice_1_left = dice(-191,246,8,-210,265,8,-210,265,1,-191,246,1);
-        Geometry dice_1_front = dice(-172,246,1,-191,246,1,-191,246,8,-172,246,8);
-        Geometry dice_1_back = dice(-172,265,1,-191,265,1,-191,265,8,-172,265,8);
+        Geometry dice_1_up = dice(-172,246,19,-191,246,19,-191,265,19,-172,265,19);
+        Geometry dice_1_right = dice(-172,246,19,-172,265,19,-172,265,1,-172,246,1);
+        Geometry dice_1_left = dice(-191,246,19,-191,265,19,-191,265,1,-191,246,1);
+        Geometry dice_1_front = dice(-172,246,1,-191,246,1,-191,246,19,-172,246,19);
+        Geometry dice_1_back = dice(-172,265,1,-191,265,1,-191,265,19,-172,265,19);
+
+        Geometry dice_2_up = dice(-50,196,19,-69,196,19,-69,215,19,-50,215,19);
+        Geometry dice_2_right = dice(-50,196,19,-50,215,19,-50,215,1,-50,196,1);
+        Geometry dice_2_left = dice(-69,196,19,-69,215,19,-69,215,1,-69,196,1);
+        Geometry dice_2_front = dice(-50,196,1,-69,196,1,-69,196,19,-50,196,19);
+        Geometry dice_2_back = dice(-50,215,1,-69,215,1,-69,215,19,-50,215,19);
+
+        List<Geometry> dice_5_top_dots1 = dice_5_dots(-69,196,19);
 
         Scene scene = new Scene.SceneBuilder("game")
                 .setGeometries(new Geometries(
+                        dice_2_up,
+                        dice_2_right,
+                        dice_2_left,
+                        dice_2_front,
+                        dice_2_back,
                         dice_1_up,
                         dice_1_right,
                         dice_1_left,
                         dice_1_front,
                         dice_1_back,
                         bord,
+                        dice_5_top_dots1.get(0),
+                        dice_5_top_dots1.get(1),
+                        dice_5_top_dots1.get(2),
+                        dice_5_top_dots1.get(3),
+                        dice_5_top_dots1.get(4),
                         triangul_1_red.get(0),
                         triangul_1_red.get(1),
                         triangul_1_red.get(2),
@@ -300,19 +329,19 @@ public class Backgammon {
                 .build();
 
         ImageWriter imageWriter = new ImageWriter("Backgammon", 600, 600);
-        Camera camera = new Camera.CameraBuilder(new Point(200, -400, 400), new Vector(-525, 650, -400), new Vector(-1, 0, 1.3125)) //
-                .setVPSize(200, 200)
-                .setVPDistance(200)
-                .setImageWriter(imageWriter) //
-                .setRayTracerBase(new RayTracerBasic(scene))
-                .build();//
-
-//        Camera camera = new Camera.CameraBuilder(new Point(-325, 250, 700), new Vector(0, 0, -700), new Vector(0, 1, 0)) //
+//        Camera camera = new Camera.CameraBuilder(new Point(200, -400, 400), new Vector(-525, 650, -400), new Vector(-1, 0, 1.3125)) //
 //                .setVPSize(200, 200)
 //                .setVPDistance(200)
 //                .setImageWriter(imageWriter) //
 //                .setRayTracerBase(new RayTracerBasic(scene))
-//                .build();
+//                .build();//
+
+        Camera camera = new Camera.CameraBuilder(new Point(-325, 250, 700), new Vector(0, 0, -700), new Vector(0, 1, 0)) //
+                .setVPSize(200, 200)
+                .setVPDistance(200)
+                .setImageWriter(imageWriter) //
+                .setRayTracerBase(new RayTracerBasic(scene))
+                .build();
         camera.renderImage(); //
         camera.writeToImage();
 

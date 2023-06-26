@@ -11,11 +11,18 @@ import static primitives.Util.isZero;
 public class Cylinder extends Tube {
 
     final public double height;
-    public Cylinder(double radius, double height,   Ray axis) {
-        super(axis, radius);
-        if (radius < 0 && height < 0)
-            throw new IllegalArgumentException("height and radius must b greater then 0");
-        this.height = height;
+    /**
+     * cylinder constructor based on a radius , ray (direction), and a height
+     * @param axisRay ray originating from base of cylinder
+     * @param radius radius of cylinder
+     * @param height height of cylinder
+     * @throws IllegalArgumentException <p>if height sent as parameter is not a positive value</p>
+     */
+    public Cylinder(double radius, double height,Ray axisRay) {
+        super(axisRay, radius);
+        if(height<= 0)
+            throw new IllegalArgumentException("height must be positive value");
+        this.height=height;
     }
 
     @Override
