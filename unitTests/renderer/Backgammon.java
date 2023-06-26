@@ -1,15 +1,13 @@
 package renderer;
 
+import geometries.Cylinder;
 import geometries.Geometries;
 import geometries.Geometry;
 import geometries.Polygon;
 import lighting.LightSource;
 import lighting.SpotLight;
 import org.junit.jupiter.api.Test;
-import primitives.Color;
-import primitives.Material;
-import primitives.Point;
-import primitives.Vector;
+import primitives.*;
 import scene.Scene;
 
 import java.util.LinkedList;
@@ -22,6 +20,13 @@ public class Backgammon {
                               double c2, double c3, double d1, double d2, double d3){
         return new Polygon(new Point(a1, a2, a3), new Point(b1, b2, b3), new Point(c1, c2, c3), new Point(d1, d2, d3))
                 .setEmission(new Color(210, 180, 140))
+                .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3));
+    }
+
+    public Geometry dice ( double a1, double a2, double a3, double b1, double b2, double b3, double c1,
+                              double c2, double c3, double d1, double d2, double d3){
+        return new Polygon(new Point(a1, a2, a3), new Point(b1, b2, b3), new Point(c1, c2, c3), new Point(d1, d2, d3))
+                .setEmission(new Color(255, 255, 255))
                 .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3));
     }
 
@@ -44,6 +49,42 @@ public class Backgammon {
         return poligons;
     }
 
+    public List<Geometry> black_pices_p(double a, double b, double c, int amount){
+        List<Geometry> cilinders = new LinkedList<>();
+        for(int i = 0; i < amount; i++){
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b + i * 40+ 1,c),new Vector(0,0,1))).setEmission(new Color(BLACK))
+                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+        }
+        return cilinders;
+    }
+
+    public List<Geometry> black_pices_m(double a, double b, double c, int amount){
+        List<Geometry> cilinders = new LinkedList<>();
+        for(int i = 0; i < amount; i++){
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b - i * 40 - 1,c),new Vector(0,0,1))).setEmission(new Color(BLACK))
+                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+        }
+        return cilinders;
+    }
+
+    public List<Geometry> white_pices_p(double a, double b, double c, int amount){
+        List<Geometry> cilinders = new LinkedList<>();
+        for(int i = 0; i < amount; i++){
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b + i * 40+ 1,c),new Vector(0,0,1))).setEmission(new Color(255,255,204))
+                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+        }
+        return cilinders;
+    }
+
+    public List<Geometry> white_pices_m(double a, double b, double c, int amount){
+        List<Geometry> cilinders = new LinkedList<>();
+        for(int i = 0; i < amount; i++){
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b - i * 40 - 1,c),new Vector(0,0,1))).setEmission(new Color(255,255,204))
+                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+        }
+        return cilinders;
+    }
+
     @Test
     public void gameTest() {
         List<LightSource> lights = new LinkedList<>();
@@ -57,66 +98,116 @@ public class Backgammon {
                 new Point(-5, 500, 0)).setEmission(new Color(210, 180, 140))
                 .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3));
 
-         List<Geometry> triangul1 = triangulRed(-17.5, 12.5, 1, -67.5, 12.5, 1, -42.5, 162.5, 1);
-        List<Geometry> triangul2 = triangulBlack(-67.5, 12.5, 1, -117.5, 12.5, 1, -92.5, 162.5, 1);
+        List<Geometry> triangul_1_red = triangulRed(-18, 13, 1, -68, 13, 1, -43, 163, 1);
+        List<Geometry> triangul_1_black = triangulBlack(-68, 13, 1, -118, 13, 1, -93, 163, 1);
 
-         Geometry R_border_1_buttom = borders(-5, 0, 0, -17.5, 0, 0, -17.5, 500, 0, -5, 500, 0);
-        Geometry R_border_1_border_top = borders(-5, 0, 10, -17.5, 0, 10, -17.5, 500, 10, -5, 500, 10);
+        List<Geometry> triangul_2_red = triangulRed(-345, 13, 1, -395, 13, 1, -370, 163, 1);
+        List<Geometry> triangul_2_black = triangulBlack(-395, 13, 1, -445, 13, 1, -420, 163, 1);
+
+        List<Geometry> triangul_3_red = triangulRed(-68, 488, 1, -118, 488, 1, -93, 338, 1);
+        List<Geometry> triangul_3_black = triangulBlack(-18, 488, 1, -68, 488, 1, -43, 338, 1);
+
+        List<Geometry> triangul_4_red = triangulRed(-395, 488, 1, -445, 488, 1, -420, 338, 1);
+        List<Geometry> triangul_4_black = triangulBlack(-345, 488, 1, -395, 488, 1, -370, 338, 1);
+
+         Geometry R_border_1_buttom = borders(-5, 0, 0, -18, 0, 0, -18, 500, 0, -5, 500, 0);
+        Geometry R_border_1_border_top = borders(-5, 0, 10, -18, 0, 10, -18, 500, 10, -5, 500, 10);
         Geometry R_border_1_border_right = borders(-5, 0, 0, -5, 0, 10, -5, 500, 10, -5, 500, 0);
-         Geometry R_border_1_border_left = borders(-17.5, 0, 0, -17.5, 0, 10, -17.5, 500, 10, -17.5, 500, 0);
-         Geometry R_border_1_border_down = borders(-5, 0, 0, -17.5, 0, 0, -17.5, 0, 10, -5, 0, 10);
-         Geometry R_border_1_border_up = borders(-5, 500, 0, -17.5, 500, 0, -17.5, 500, 10, -5, 500, 10);
+         Geometry R_border_1_border_left = borders(-18, 0, 0, -18, 0, 10, -18, 500, 10, -18, 500, 0);
+         Geometry R_border_1_border_down = borders(-5, 0, 0, -18, 0, 0, -18, 0, 10, -5, 0, 10);
+         Geometry R_border_1_border_up = borders(-5, 500, 0, -18, 500, 0, -17.5, 500, 10, -5, 500, 10);
 
-        Geometry D_border_2_buttom = borders(-17.5, 0, 0, -312, 0, 0, -312, 12.5, 0, -17.5, 12.5, 0);
-        Geometry D_border_2_border_top = borders(-17.5, 0, 10, -312, 0, 10, -312, 12.5, 10, -17.5, 12.5, 10);
-        Geometry D_border_2_border_right = borders(-17.5, 12.5, 0, -312, 12.5, 0, -312, 12.5, 10, -17.5, 12.5, 10);
-        Geometry D_border_2_border_left = borders(-17.5, 0, 0, -312, 0, 0, -312, 0, 10, -17.5, 0, 10);
+        Geometry D_border_2_buttom = borders(-18, 0, 0, -318, 0, 0, -318, 13, 0, -18, 13, 0);
+        Geometry D_border_2_border_top = borders(-18, 0, 10, -318, 0, 10, -318, 13, 10, -18, 13, 10);
+        Geometry D_border_2_border_right = borders(-18, 13, 0, -318, 13, 0, -318, 13, 10, -18, 13, 10);
+        Geometry D_border_2_border_left = borders(-18, 0, 0, -318, 0, 0, -318, 0, 10, -18, 0, 10);
 
-        Geometry MR_border_3_buttom = borders(-312, 0, 0, -324.5, 0, 0, -324.5, 500, 0, -312, 500, 0);
-        Geometry MR_border_3_border_top = borders(-312, 0, 10, -324.5, 0, 10, -324.5, 500, 10, -312, 500, 10);
-        Geometry MR_border_3_border_right = borders(-312, 0, 0, -312, 0, 10, -312, 500, 10, -312, 500, 0);
-        Geometry MR_border_3_border_left = borders(-324.5, 0, 0, -324.5, 0, 10, -324.5, 500, 10, -324.5, 500, 0);
-        Geometry MR_border_3_border_down = borders(-312, 0, 0, -324.5, 0, 0, -324.5, 0, 10, -312, 0, 10);
-        Geometry MR_border_3_border_up = borders(-312, 500, 0, -324.5, 500, 0, -324.5, 500, 10, -312, 500, 10);
+        Geometry MR_border_3_buttom = borders(-318, 0, 0, -331, 0, 0, -331, 500, 0, -318, 500, 0);
+        Geometry MR_border_3_border_top = borders(-318, 0, 10, -331, 0, 10, -331, 500, 10, -318, 500, 10);
+        Geometry MR_border_3_border_right = borders(-318, 0, 0, -318, 0, 10, -318, 500, 10, -318, 500, 0);
+        Geometry MR_border_3_border_left = borders(-331, 0, 0, -331, 0, 10, -331, 500, 10, -331, 500, 0);
+        Geometry MR_border_3_border_down = borders(-318, 0, 0, -331, 0, 0, -331, 0, 10, -318, 0, 10);
+        Geometry MR_border_3_border_up = borders(-318, 500, 0, -331, 500, 0, -331, 500, 10, -318, 500, 10);
 
-        Geometry U_border_4_buttom = borders(-17.5, 487.5, 0, -312, 487.5, 0, -312, 500, 0, -17.5, 500, 0);
-        Geometry U_border_4_border_top = borders(-17.5, 487.5, 10, -312, 487.5, 10, -312, 500, 10, -17.5, 500, 10);
-        Geometry U_border_4_border_right = borders(-17.5, 500, 0, -312, 500, 0, -312, 500, 10, -17.5, 500, 10);
-        Geometry U_border_4_border_left = borders(-17.5, 487.5, 0, -312, 487.5, 0, -312, 487.5, 10, -17.5, 487.5, 10);
+        Geometry U_border_4_buttom = borders(-18, 488, 0, -318, 488, 0, -318, 500, 0, -18, 500, 0);
+        Geometry U_border_4_border_top = borders(-18, 488, 10, -318, 488, 10, -318, 500, 10, -18, 500, 10);
+        Geometry U_border_4_border_right = borders(-18, 500, 0, -318, 500, 0, -318, 500, 10, -18, 500, 10);
+        Geometry U_border_4_border_left = borders(-18, 488, 0, -318, 488, 0, -318, 488, 10, -18, 488, 10);
 
-        Geometry ML_border_5_buttom = borders(-325, 0, 0, -337.5, 0, 0, -337.5, 500, 0, -325, 500, 0);
-        Geometry ML_border_5_border_top = borders(-325, 0, 10, -337.5, 0, 10, -337.5, 500, 10, -325, 500, 10);
-        Geometry ML_border_5_border_right = borders(-325, 0, 0, -325, 0, 10, -325, 500, 10, -325, 500, 0);
-        Geometry ML_border_5_border_left = borders(-337.5, 0, 0, -337.5, 0, 10, -337.5, 500, 10, -337.5, 500, 0);
-        Geometry ML_border_5_border_down = borders(-325, 0, 0, -337.5, 0, 0, -337.5, 0, 10, -325, 0, 10);
-        Geometry ML_border_5_border_up = borders(-325, 500, 0, -337.5, 500, 0, -337.5, 500, 10, -325, 500, 10);
+        Geometry ML_border_5_buttom = borders(-332, 0, 0, -345, 0, 0, -345, 500, 0, -332, 500, 0);
+        Geometry ML_border_5_border_top = borders(-332, 0, 10, -345, 0, 10, -345, 500, 10, -332, 500, 10);
+        Geometry ML_border_5_border_right = borders(-332, 0, 0, -332, 0, 10, -332, 500, 10, -332, 500, 0);
+        Geometry ML_border_5_border_left = borders(-345, 0, 0, -345, 0, 10, -345, 500, 10, -345, 500, 0);
+        Geometry ML_border_5_border_down = borders(-332, 0, 0, -345, 0, 0, -345, 0, 10, -332, 0, 10);
+        Geometry ML_border_5_border_up = borders(-332, 500, 0, -345, 500, 0, -345, 500, 10, -332, 500, 10);
 
-        Geometry LD_border_2_buttom = borders(-325, 0, 0, -642.5, 0, 0, -642.5, 12.5, 0, -325, 12.5, 0);
-        Geometry LD_border_2_border_top = borders(-325, 0, 10, -642.5, 0, 10, -642.5, 12.5, 10, -325, 12.5, 10);
-        Geometry LD_border_2_border_right = borders(-325, 12.5, 0, -642.5, 12.5, 0, -642.5, 12.5, 10, -325, 12.5, 10);
-        Geometry LD_border_2_border_left = borders(-325, 0, 0, -642.5, 0, 0, -642.5, 0, 10, -325, 0, 10);
+        Geometry LD_border_2_buttom = borders(-332, 0, 0, -645, 0, 0, -645, 13, 0, -332, 13, 0);
+        Geometry LD_border_2_border_top = borders(-332, 0, 10, -645, 0, 10, -645, 13, 10, -332, 13, 10);
+        Geometry LD_border_2_border_right = borders(-332, 13, 0, -645, 13, 0, -645, 13, 10, -332, 13, 10);
+        Geometry LD_border_2_border_left = borders(-332, 0, 0, -645, 0, 0, -645, 0, 10, -332, 0, 10);
 
-        Geometry LL_border_5_buttom = borders(-642.5, 0, 0, -655, 0, 0, -665, 500, 0, -642.5, 500, 0);
-        Geometry LL_border_5_border_top = borders(-642.5, 0, 10, -655, 0, 10, -665, 500, 10, -642.5, 500, 10);
-        Geometry LL_border_5_border_right = borders(-642.5, 0, 0, -642.5, 0, 10, -642.5, 500, 10, -642.5, 500, 0);
-        Geometry LL_border_5_border_left = borders(-655, 0, 0, -655, 0, 10, -655, 500, 10, -655, 500, 0);
-        Geometry LL_border_5_border_down = borders(-642.5, 0, 0, -655, 0, 0, -655, 0, 10, -642.5, 0, 10);
-        Geometry LL_border_5_border_up = borders(-642.5, 500, 0, -655, 500, 0, -655, 500, 10, -642.5, 500, 10);
+        Geometry LL_border_5_buttom = borders(-645, 0, 0, -658, 0, 0, -658, 500, 0, -645, 500, 0);
+        Geometry LL_border_5_border_top = borders(-645, 0, 10, -658, 0, 10, -658, 500, 10, -645, 500, 10);
+        Geometry LL_border_5_border_right = borders(-645, 0, 0, -645, 0, 10, -645, 500, 10, -645, 500, 0);
+        Geometry LL_border_5_border_left = borders(-658, 0, 0, -658, 0, 10, -658, 500, 10, -658, 500, 0);
+        Geometry LL_border_5_border_down = borders(-645, 0, 0, -658, 0, 0, -658, 0, 10, -645, 0, 10);
+        Geometry LL_border_5_border_up = borders(-645, 500, 0, -658, 500, 0, -658, 500, 10, -645, 500, 10);
 
-        Geometry LU_border_4_buttom = borders(-337.5, 487.5, 0, -642.5, 487.5, 0, -642.5, 500, 0, -337.5, 500, 0);
-        Geometry LU_border_4_border_top = borders(-337.5, 487.5, 10, -642.5, 487.5, 10, -642.5, 500, 10, -337.5, 500, 10);
-        Geometry LU_border_4_border_right = borders(-337.5, 500, 0, -642.5, 500, 0, -642.5, 500, 10, -337.5, 500, 10);
-        Geometry LU_border_4_border_left = borders(-337.5, 487.5, 0, -642.5, 487.5, 0, -642.5, 487.5, 10, -337.5, 487.5, 10);
+        Geometry LU_border_4_buttom = borders(-345, 488, 0, -645, 488, 0, -645, 500, 0, -345, 500, 0);
+        Geometry LU_border_4_border_top = borders(-345, 488, 10, -645, 488, 10, -645, 500, 10, -345, 500, 10);
+        Geometry LU_border_4_border_right = borders(-345, 500, 0, -645, 500, 0, -645, 500, 10, -345, 500, 10);
+        Geometry LU_border_4_border_left = borders(-345, 488, 0, -645, 488, 0, -645, 488, 10, -345, 488, 10);
+
+        List<Geometry> two_buttom_black_pices = black_pices_p(-43,33,1,2);
+        List<Geometry> five_buttom_black_pices = black_pices_p(-618,33,1,5);
+
+        List<Geometry> five_upper_black_pices = black_pices_m(-293, 467, 1 , 5);
+        List<Geometry> three_upper_black_pices = black_pices_m(-420, 467, 1 , 3);
+
+        List<Geometry> two_buttom_white_pices = white_pices_m(-43,33+449-13,1,2);
+        List<Geometry> five_buttom_white_pices = white_pices_m(-618,33+449-13,1,5);
+
+        List<Geometry> five_upper_white_pices = white_pices_p(-293, 467-449+13, 1 , 5);
+        List<Geometry> three_upper_white_pices = white_pices_p(-420, 467-449+13, 1 , 3);
+
+        Geometry dice_1_up = dice(-172,246,8,-191,246,8,-191,265,8,-172,265,8);
+        Geometry dice_1_right = dice(-172,246,8,-191,265,8,-191,265,1,-172,246,1);
+        Geometry dice_1_left = dice(-191,246,8,-210,265,8,-210,265,1,-191,246,1);
+        Geometry dice_1_front = dice(-172,246,1,-191,246,1,-191,246,8,-172,246,8);
+        Geometry dice_1_back = dice(-172,265,1,-191,265,1,-191,265,8,-172,265,8);
 
         Scene scene = new Scene.SceneBuilder("game")
                 .setGeometries(new Geometries(
+                        dice_1_up,
+                        dice_1_right,
+                        dice_1_left,
+                        dice_1_front,
+                        dice_1_back,
                         bord,
-                        triangul1.get(0),
-                        triangul1.get(1),
-                        triangul1.get(2),
-                        triangul2.get(0),
-                        triangul2.get(1),
-                        triangul2.get(2),
+                        triangul_1_red.get(0),
+                        triangul_1_red.get(1),
+                        triangul_1_red.get(2),
+                        triangul_1_black.get(0),
+                        triangul_1_black.get(1),
+                        triangul_1_black.get(2),
+                        triangul_2_red.get(0),
+                        triangul_2_red.get(1),
+                        triangul_2_red.get(2),
+                        triangul_2_black.get(0),
+                        triangul_2_black.get(1),
+                        triangul_2_black.get(2),
+                        triangul_3_red.get(0),
+                        triangul_3_red.get(1),
+                        triangul_3_red.get(2),
+                        triangul_3_black.get(0),
+                        triangul_3_black.get(1),
+                        triangul_3_black.get(2),
+                        triangul_4_red.get(0),
+                        triangul_4_red.get(1),
+                        triangul_4_red.get(2),
+                        triangul_4_black.get(0),
+                        triangul_4_black.get(1),
+                        triangul_4_black.get(2),
                         R_border_1_border_up,
                         R_border_1_border_down,
                         R_border_1_border_left,
@@ -156,7 +247,52 @@ public class Backgammon {
                         LU_border_4_buttom,
                         LU_border_4_border_top,
                         LU_border_4_border_right,
-                        LU_border_4_border_left
+                        LU_border_4_border_left,
+                        two_buttom_black_pices.get(0),
+                        two_buttom_black_pices.get(1),
+                        five_buttom_black_pices.get(0),
+                        five_buttom_black_pices.get(1),
+                        five_buttom_black_pices.get(2),
+                        five_buttom_black_pices.get(3),
+                        five_buttom_black_pices.get(4),
+                        five_upper_black_pices.get(0),
+                        five_upper_black_pices.get(1),
+                        five_upper_black_pices.get(2),
+                        five_upper_black_pices.get(3),
+                        five_upper_black_pices.get(4),
+                        three_upper_black_pices.get(0),
+                        three_upper_black_pices.get(1),
+                        three_upper_black_pices.get(2),
+                        two_buttom_black_pices.get(0),
+                        two_buttom_black_pices.get(1),
+                        five_buttom_black_pices.get(0),
+                        five_buttom_black_pices.get(1),
+                        five_buttom_black_pices.get(2),
+                        five_buttom_black_pices.get(3),
+                        five_buttom_black_pices.get(4),
+                        five_upper_black_pices.get(0),
+                        five_upper_black_pices.get(1),
+                        five_upper_black_pices.get(2),
+                        five_upper_black_pices.get(3),
+                        five_upper_black_pices.get(4),
+                        three_upper_black_pices.get(0),
+                        three_upper_black_pices.get(1),
+                        three_upper_black_pices.get(2),
+                        two_buttom_white_pices.get(0),
+                        two_buttom_white_pices.get(1),
+                        five_buttom_white_pices.get(0),
+                        five_buttom_white_pices.get(1),
+                        five_buttom_white_pices.get(2),
+                        five_buttom_white_pices.get(3),
+                        five_buttom_white_pices.get(4),
+                        five_upper_white_pices.get(0),
+                        five_upper_white_pices.get(1),
+                        five_upper_white_pices.get(2),
+                        five_upper_white_pices.get(3),
+                        five_upper_white_pices.get(4),
+                        three_upper_white_pices.get(0),
+                        three_upper_white_pices.get(1),
+                        three_upper_white_pices.get(2)
                         ))
                 .setBackground(new Color(255, 255, 255))
                 .setLights(lights)
@@ -170,6 +306,13 @@ public class Backgammon {
                 .setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene))
                 .build();//
+
+//        Camera camera = new Camera.CameraBuilder(new Point(-325, 250, 700), new Vector(0, 0, -700), new Vector(0, 1, 0)) //
+//                .setVPSize(200, 200)
+//                .setVPDistance(200)
+//                .setImageWriter(imageWriter) //
+//                .setRayTracerBase(new RayTracerBasic(scene))
+//                .build();
         camera.renderImage(); //
         camera.writeToImage();
 
