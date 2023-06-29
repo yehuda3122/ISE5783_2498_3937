@@ -70,7 +70,7 @@ public class BackgammonTest {
         return new Polygon(new Point(a1, a2, a3), new Point(b1, b2, b3), new Point(c1, c2, c3), new Point(d1, d2, d3))
 //                .setEmission(new Color(255, 255, 255))
                 .setEmission(WHITE)
-                .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3));
+                .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0));
     }
 
     public List<Geometry> triangulRed (double a1, double a2, double a3, double b1, double b2, double b3, double c1,
@@ -325,39 +325,39 @@ public class BackgammonTest {
     private List<Geometry> five_upper_white_pices = white_pices_p(-293, 467-449+13, 1 , 5);
     private List<Geometry> three_upper_white_pices = white_pices_p(-420, 467-449+13, 1 , 3);
 
-    private Geometry dice_1_up = dice(-172,246,19,-191,246,19,-191,265,19,-172,265,19);
-    private Geometry dice_1_right = dice(-172,246,19,-172,265,19,-172,265,1,-172,246,1);
-    private Geometry dice_1_left = dice(-191,246,19,-191,265,19,-191,265,1,-191,246,1);
-    private Geometry dice_1_front = dice(-172,246,1,-191,246,1,-191,246,19,-172,246,19);
-    private Geometry dice_1_back = dice(-172,265,1,-191,265,1,-191,265,19,-172,265,19);
+    private Geometry dice_1_up = dice(-172,246,59,-191,246,59,-191,265,59,-172,265,59);
+    private Geometry dice_1_right = dice(-172,246,59,-172,265,59,-172,265,41,-172,246,41);
+    private Geometry dice_1_left = dice(-191,246,59,-191,265,59,-191,265,41,-191,246,41);
+    private Geometry dice_1_front = dice(-172,246,41,-191,246,41,-191,246,59,-172,246,59);
+    private Geometry dice_1_back = dice(-172,265,41,-191,265,41,-191,265,59,-172,265,59);
 
-    private Geometry dice_2_up = dice(-50,196,19,-69,196,19,-69,215,19,-50,215,19);
-    private Geometry dice_2_right = dice(-50,196,19,-50,215,19,-50,215,1,-50,196,1);
-    private Geometry dice_2_left = dice(-69,196,19,-69,215,19,-69,215,1,-69,196,1);
-    private Geometry dice_2_front = dice(-50,196,1,-69,196,1,-69,196,19,-50,196,19);
-    private Geometry dice_2_back = dice(-50,215,1,-69,215,1,-69,215,19,-50,215,19);
+    private Geometry dice_2_up = dice(-50,196,39,-69,196,39,-69,215,39,-50,215,39);
+    private Geometry dice_2_right = dice(-50,196,39,-50,215,39,-50,215,21,-50,196,21);
+    private Geometry dice_2_left = dice(-69,196,39,-69,215,39,-69,215,21,-69,196,21);
+    private Geometry dice_2_front = dice(-50,196,21,-69,196,21,-69,196,39,-50,196,39);
+    private Geometry dice_2_back = dice(-50,215,21,-69,215,21,-69,215,39,-50,215,39);
 
-    private List<Geometry> dice_5_top_dots1 = dice_5_dots(-69,196,19);
+    private List<Geometry> dice_5_top_dots1 = dice_5_dots(-69,196,39);
 
-    private List<Geometry> dice_6_top_dots1 = dice_6_dots(-191,246,19);
+    private List<Geometry> dice_6_top_dots1 = dice_6_dots(-191,246,59);
 
-    private List<Geometry> dice_4_top_dots1 = dice_4_dots(-172,246,1);
+    private List<Geometry> dice_4_top_dots1 = dice_4_dots(-172,246,41);
 
-    private List<Geometry> dice_4_top_dots2 = dice_4_dots(-69,196,1);
+    private List<Geometry> dice_4_top_dots2 = dice_4_dots(-69,196,21);
 
-    private List<Geometry> dice_2_dors2 = dice_2_dots(-69, 196, 1);
+    private List<Geometry> dice_2_dors2 = dice_2_dots(-69, 196, 21);
 
-    private List<Geometry> dice_2_dors1 = dice_2_dots(-191, 265, 1);
+    private List<Geometry> dice_2_dors1 = dice_2_dots(-191, 265, 41);
 
-    private List<Geometry> dice_3_dots2 = dice_3_dots(-50,196,1);
+    private List<Geometry> dice_3_dots2 = dice_3_dots(-50,196,21);
 
-    private List<Geometry> dice_3_dots1 = dice_3_dots(-191,246,1);
+    private List<Geometry> dice_3_dots1 = dice_3_dots(-191,246,41);
 
-    private Geometry dice_1_dot1 = new Cylinder(2,1,new Ray(new Point(-191 + 9,246 +1, 1 + 9), new Vector(0,0,1)))
+    private Geometry dice_1_dot1 = new Cylinder(2,1,new Ray(new Point(-191 + 9,246 +1, 41 + 9), new Vector(0,0,1)))
             .setEmission(BLACK)
             .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0));
 
-    private Geometry dice_1_dot2 = new Cylinder(2,1,new Ray(new Point(-69 + 9,215 , 1 + 9), new Vector(0,0,1)))
+    private Geometry dice_1_dot2 = new Cylinder(2,1,new Ray(new Point(-69 + 9,215 , 21 + 9), new Vector(0,0,1)))
             .setEmission(BLACK)
             .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0));
 
@@ -631,13 +631,14 @@ public class BackgammonTest {
     @Test
     public void gameTestSide2NoAntiAliasing() {
         lights.clear();
-        lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
-                .setKL(4E-5).setKQ(2E-5));
-        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
-                .setKL(4E-5).setKQ(2E-5));
-        lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
-        lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
-
+//        lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
+//                .setKL(4E-5).setKQ(2E-5));
+//        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+//                .setKL(4E-5).setKQ(2E-5));
+//        lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
+//        lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
+        lights.add(new SpotLight(new Color(yellow),new Point(-210,267,95),new Vector(-3,-1,-1)));
+        lights.add(new SpotLight(new Color(yellow),new Point(-35,184,85),new Vector(-3,1,-1)));
         Scene scene = new Scene.SceneBuilder("game")
 //                .setAmbientLight(new AmbientLight(new Color(96,96,96), new Double3(.15)))
                 .setGeometries(all_game
@@ -654,6 +655,7 @@ public class BackgammonTest {
                 .setVPDistance(200)
                 .setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene))
+                .setMultithreading(3)
                 .setDebugPrint(0.2)
                 .build();//
 

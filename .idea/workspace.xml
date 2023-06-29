@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="adding AntiAliasing improvement and arrangement of Backgammon tests file">
+    <list default="true" id="a354f1a7-d98f-4512-826e-c295bbd6123c" name="Changes" comment="finishing adages of bord">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/BackgammonUpView.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/BackgammonUpView.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/Backgammon.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/BackgammonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/AntiAliasRANDOM_9x9.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/AntiAliasRANDOM_9x9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/AntiAliasingAdaptive16.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/AntiAliasingAdaptive16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/AntiAliasingReflectionCORNERS.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/AntiAliasingReflectionCORNERS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/BackgammonSide1ViewNoAntiAliasing.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/BackgammonSide1ViewNoAntiAliasing.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/BackgammonSide2ViewNoAntiAliasing.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/BackgammonSide2ViewNoAntiAliasing.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/advancedBeamTestRandom.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/advancedBeamTestRandom.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/BackgammonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/BackgammonTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +86,22 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.BackgammonTest.gameTestSide2NoAntiAliasing">
+    <configuration name="BackgammonTest.gameTestSide1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_2498_3937" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.BackgammonTest" />
+      <option name="METHOD_NAME" value="gameTestSide1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BackgammonTest.gameTestSide1NoAntiAliasing" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_2498_3937" />
       <extension name="coverage">
@@ -146,29 +166,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Backgammon.gameTestUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_2498_3937" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.Backgammon" />
-      <option name="METHOD_NAME" value="gameTestUp" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.BackgammonTest.gameTestSide2NoAntiAliasing" />
         <item itemvalue="JUnit.BackgammonTest.gameTestSide1NoAntiAliasing" />
+        <item itemvalue="JUnit.BackgammonTest.gameTestSide1" />
         <item itemvalue="JUnit.BackgammonTest.gameTestbbbbbbbbbbbbbb" />
         <item itemvalue="JUnit.BackgammonTest.gameTestUpNoAntiAliasing" />
-        <item itemvalue="JUnit.Backgammon.gameTestUp" />
       </list>
     </recent_temporary>
   </component>
