@@ -602,55 +602,6 @@ public class Camera {
         imageWriter.writeToImage();
     }
 
-//    /**
-//     * render image "captured" through view plane
-//     */
-//    public void renderImage() {
-//        // check that image, writing and rendering objects are instantiated
-//        if (imageWriter == null)
-//            throw new MissingResourceException("image writer is not initialized", ImageWriter.class.getName(), "");
-//
-//        if (rayTracerBase == null)
-//            throw new MissingResourceException("ray tracer is not initialized", RayTracerBase.class.getName(), "");
-//
-//        int nX = imageWriter.getNx();
-//        int nY = imageWriter.getNy();
-//
-//        for (int i = 0; i < nX; i++) {
-//            for (int j = 0; j < nY; j++) {
-//                castRay(nX, nY, j, i);
-//            }
-//            //initialize thread progress reporter
-////        Pixel.initialize(nY, nX, printInterval);
-////
-////        // for each pixel (i,j) , construct  ray/rays from camera through pixel,
-////        // functions use rayTracer object to get correct color, then use imageWriter to write pixel to the file
-////
-////        if (isUseDOF()) {
-////            renderImageDOF(nX,nY);
-////        }
-////        //cast ray according to Anti-Aliasing method set to Camera
-////        else {
-////            switch (getAntiAliasing()) {
-////                // no method used - cast single ray to center of pixel
-////                case NONE -> {
-////                    renderImageAntiAliasingNone(nX,nY);
-////                }
-////                // bean of random rays cast for each pixel besides the ray towards the center
-////                case RANDOM -> {
-////                    renderImageAntiAliasingRandom(nX,nY);
-////                }
-////                // four rays cast to four corners of pixel besides the ray towards the center
-////                case CORNERS -> {
-////                    renderImageAntiAliasingCorners(nX,nY);
-////                }
-////                case ADAPTIVE -> {
-////                    renderImageAntiAliasingAdaptive(nX,nY);
-////                }
-////            }
-////        }
-//        }
-//    }
 
     /**
      * render image "captured" through view plane

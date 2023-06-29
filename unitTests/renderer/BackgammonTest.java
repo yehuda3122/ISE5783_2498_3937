@@ -4,7 +4,6 @@ import geometries.Cylinder;
 import geometries.Geometries;
 import geometries.Geometry;
 import geometries.Polygon;
-import lighting.AmbientLight;
 import lighting.DirectionalLight;
 import lighting.LightSource;
 import lighting.SpotLight;
@@ -17,7 +16,31 @@ import java.util.List;
 
 import static java.awt.Color.*;
 
-public class Backgammon {
+
+/**
+ * A class that renders a backgammon board using a ray tracing algorithm.
+ */
+public class BackgammonTest {
+    private static final Color RED = new Color(255, 0, 0);
+    private static final Color BLACK = new Color(0, 0, 0);
+    private static final Color WHITE = new Color(255,255,255);
+    /**
+     * Creates a polygon representing the borders of the backgammon board.
+     *
+     * @param a1 x-coordinate of point A
+     * @param a2 y-coordinate of point A
+     * @param a3 z-coordinate of point A
+     * @param b1 x-coordinate of point B
+     * @param b2 y-coordinate of point B
+     * @param b3 z-coordinate of point B
+     * @param c1 x-coordinate of point C
+     * @param c2 y-coordinate of point C
+     * @param c3 z-coordinate of point C
+     * @param d1 x-coordinate of point D
+     * @param d2 y-coordinate of point D
+     * @param d3 z-coordinate of point D
+     * @return the polygon representing the borders
+     */
     public Geometry borders ( double a1, double a2, double a3, double b1, double b2, double b3, double c1,
                               double c2, double c3, double d1, double d2, double d3){
         return new Polygon(new Point(a1, a2, a3), new Point(b1, b2, b3), new Point(c1, c2, c3), new Point(d1, d2, d3))
@@ -25,10 +48,28 @@ public class Backgammon {
                 .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3));
     }
 
+    /**
+     * Creates a polygon representing a dice.
+     *
+     * @param a1 x-coordinate of point A
+     * @param a2 y-coordinate of point A
+     * @param a3 z-coordinate of point A
+     * @param b1 x-coordinate of point B
+     * @param b2 y-coordinate of point B
+     * @param b3 z-coordinate of point B
+     * @param c1 x-coordinate of point C
+     * @param c2 y-coordinate of point C
+     * @param c3 z-coordinate of point C
+     * @param d1 x-coordinate of point D
+     * @param d2 y-coordinate of point D
+     * @param d3 z-coordinate of point D
+     * @return the polygon representing the dice
+     */
     public Geometry dice ( double a1, double a2, double a3, double b1, double b2, double b3, double c1,
                               double c2, double c3, double d1, double d2, double d3){
         return new Polygon(new Point(a1, a2, a3), new Point(b1, b2, b3), new Point(c1, c2, c3), new Point(d1, d2, d3))
-                .setEmission(new Color(255, 255, 255))
+//                .setEmission(new Color(255, 255, 255))
+                .setEmission(WHITE)
                 .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3));
     }
 
@@ -36,8 +77,13 @@ public class Backgammon {
                                     double c2, double c3){
         List<Geometry> poligons = new LinkedList<>();
         for (int i = 0; i < 3; i++){
-            poligons.add(new Polygon(new Point(a1 - 100*i, a2, a3), new Point(b1 - 100*i, b2, b3), new Point(c1 - 100*i, c2, c3)).setEmission(new Color(RED))
-                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3)));
+            poligons.add(new Polygon(new Point(a1 - 100*i, a2, a3), new Point(b1 - 100*i, b2, b3), new Point(c1 - 100*i, c2, c3))
+                    .setEmission(RED)
+                    .setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(80)
+                            .setkT(0.3)));
         }
         return poligons;
     }
@@ -45,8 +91,13 @@ public class Backgammon {
                                        double c2, double c3){
         List<Geometry> poligons = new LinkedList<>();
         for (int i = 0; i < 3; i++){
-            poligons.add(new Polygon(new Point(a1 - 100*i, a2, a3), new Point(b1 - 100*i, b2, b3), new Point(c1 - 100*i, c2, c3)).setEmission(new Color(BLACK))
-                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(80).setkT(0.3)));
+            poligons.add(new Polygon(new Point(a1 - 100*i, a2, a3), new Point(b1 - 100*i, b2, b3), new Point(c1 - 100*i, c2, c3))
+                    .setEmission(BLACK)
+                    .setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(80)
+                            .setkT(0.3)));
         }
         return poligons;
     }
@@ -54,8 +105,13 @@ public class Backgammon {
     public List<Geometry> black_pices_p(double a, double b, double c, int amount){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < amount; i++){
-            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b + i * 40+ 1,c),new Vector(0,0,1))).setEmission(new Color(BLACK))
-                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b + i * 40+ 1,c),new Vector(0,0,1)))
+                    .setEmission(BLACK)
+                    .setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(800)
+                            .setkT(0)));
         }
         return cilinders;
     }
@@ -63,8 +119,13 @@ public class Backgammon {
     public List<Geometry> black_pices_m(double a, double b, double c, int amount){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < amount; i++){
-            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b - i * 40 - 1,c),new Vector(0,0,1))).setEmission(new Color(BLACK))
-                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b - i * 40 - 1,c),new Vector(0,0,1)))
+                    .setEmission(BLACK)
+                    .setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(800)
+                            .setkT(0)));
         }
         return cilinders;
     }
@@ -72,8 +133,13 @@ public class Backgammon {
     public List<Geometry> white_pices_p(double a, double b, double c, int amount){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < amount; i++){
-            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b + i * 40+ 1,c),new Vector(0,0,1))).setEmission(new Color(255,255,204))
-                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b + i * 40+ 1,c),new Vector(0,0,1)))
+                    .setEmission(new Color(255,255,204))
+                    .setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(800)
+                            .setkT(0)));
         }
         return cilinders;
     }
@@ -81,20 +147,48 @@ public class Backgammon {
     public List<Geometry> dice_5_dots(double a, double b, double c){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < 2; i++){
-                    cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 11 + 3,b + 4,c),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
-                    cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 11 + 3,b + 15,c),new Vector(0,0,1))).setEmission(new Color(black))
-                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+                    cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 11 + 3,b + 4,c),new Vector(0,0,1)))
+                            .setEmission(BLACK)
+                            .setMaterial(new Material()
+                                    .setKd(0.25)
+                                    .setKs(0.25)
+                                    .setnShininess(800)
+                                    .setkT(0)));
+                    cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 11 + 3,b + 15,c),new Vector(0,0,1)))
+                            .setEmission(BLACK)
+                            .setMaterial(new Material()
+                                    .setKd(0.25)
+                                    .setKs(0.25)
+                                    .setnShininess(800)
+                                    .setkT(0)));
         }
-        cilinders.add(new Cylinder(2,1,new Ray(new Point(a+9,b+9,c),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+        cilinders.add(new Cylinder(2,1,new Ray(new Point(a+9,b+9,c),new Vector(0,0,1)))
+                .setEmission(BLACK)
+                .setMaterial(new Material()
+                        .setKd(0.25)
+                        .setKs(0.25)
+                        .setnShininess(800)
+                        .setkT(0)));
         return cilinders;
     }
 
     public List<Geometry> dice_6_dots(double a, double b, double c){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < 3; i++){
-            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 6+ 2,b + 3,c),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
-            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 6+ 2,b + 13,c),new Vector(0,0,1))).setEmission(new Color(black))
-                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 6+ 2,b + 3,c),new Vector(0,0,1)))
+                    .setEmission(BLACK).
+                    setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(800)
+                            .setkT(0)));
+            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 6+ 2,b + 13,c),new Vector(0,0,1)))
+                    .setEmission(BLACK)
+                    .setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(800)
+                            .setkT(0)));
         }
         return cilinders;
     }
@@ -102,8 +196,11 @@ public class Backgammon {
     public List<Geometry> dice_4_dots(double a, double b, double c){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < 2; i++){
-            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a ,b + 3,c + i * 8 + 3),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
-            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a ,b + 13,c+ i * 8 + 3),new Vector(0,0,1))).setEmission(new Color(black))
+            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a ,b + 3,c + i * 8 + 3),new Vector(0,0,1)))
+                    .setEmission(BLACK)
+                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a ,b + 13,c+ i * 8 + 3),new Vector(0,0,1)))
+                    .setEmission(BLACK)
                     .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
         }
         return cilinders;
@@ -112,9 +209,13 @@ public class Backgammon {
     public List<Geometry> dice_2_dots(double a, double b, double c){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < 2; i++){
-            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 11 + 4,b - 1 ,c + i * 11 + 3),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
-//            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a ,b + 13,c+ i * 8 + 3),new Vector(0,0,1))).setEmission(new Color(black))
-//                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + i * 11 + 4,b - 1 ,c + i * 11 + 3),new Vector(0,0,1)))
+                    .setEmission(BLACK).
+                    setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(800)
+                            .setkT(0)));
         }
         return cilinders;
     }
@@ -122,9 +223,13 @@ public class Backgammon {
     public List<Geometry> dice_3_dots(double a, double b, double c){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < 3; i++){
-            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + 1 ,b+ i * 5 + 4 ,c + i * 5 + 3),new Vector(0,0,1))).setEmission(new Color(black)).setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
-//            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a ,b + 13,c+ i * 8 + 3),new Vector(0,0,1))).setEmission(new Color(black))
-//                    .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
+            cilinders.add(new Cylinder(2, 1 ,new Ray(new Point(a + 1 ,b+ i * 5 + 4 ,c + i * 5 + 3),new Vector(0,0,1)))
+                    .setEmission(BLACK).
+                    setMaterial(new Material()
+                            .setKd(0.25)
+                            .setKs(0.25)
+                            .setnShininess(800)
+                            .setkT(0)));
         }
         return cilinders;
     }
@@ -132,7 +237,8 @@ public class Backgammon {
     public List<Geometry> white_pices_m(double a, double b, double c, int amount){
         List<Geometry> cilinders = new LinkedList<>();
         for(int i = 0; i < amount; i++){
-            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b - i * 40 - 1,c),new Vector(0,0,1))).setEmission(new Color(255,255,204))
+            cilinders.add(new Cylinder(20,5,new Ray(new Point(a,b - i * 40 - 1,c),new Vector(0,0,1)))
+                    .setEmission(new Color(255,255,204))
                     .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0)));
         }
         return cilinders;
@@ -247,10 +353,12 @@ public class Backgammon {
 
     private List<Geometry> dice_3_dots1 = dice_3_dots(-191,246,1);
 
-    private Geometry dice_1_dot1 = new Cylinder(2,1,new Ray(new Point(-191 + 9,246 +1, 1 + 9), new Vector(0,0,1))).setEmission(new Color(black))
+    private Geometry dice_1_dot1 = new Cylinder(2,1,new Ray(new Point(-191 + 9,246 +1, 1 + 9), new Vector(0,0,1)))
+            .setEmission(BLACK)
             .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0));
 
-    private Geometry dice_1_dot2 = new Cylinder(2,1,new Ray(new Point(-69 + 9,215 , 1 + 9), new Vector(0,0,1))).setEmission(new Color(black))
+    private Geometry dice_1_dot2 = new Cylinder(2,1,new Ray(new Point(-69 + 9,215 , 1 + 9), new Vector(0,0,1)))
+            .setEmission(BLACK)
             .setMaterial(new Material().setKd(0.25).setKs(0.25).setnShininess(800).setkT(0));
 
     public Geometries mergeGeometries(List<Geometry> list){
@@ -348,171 +456,11 @@ public class Backgammon {
         lights.clear();
         lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
                 .setKL(4E-5).setKQ(2E-5));
-        lights.add(new SpotLight(new Color(WHITE), new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
                 .setKL(4E-5).setKQ(2E-5));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
 
-
-//        Scene scene = new Scene.SceneBuilder("game")
-////                .setAmbientLight(new AmbientLight(new Color(96,96,96), new Double3(.15)))
-//                .setGeometries(new Geometries(
-//                        dice_2_up,
-//                        dice_2_right,
-//                        dice_2_left,
-//                        dice_2_front,
-//                        dice_2_back,
-//                        dice_1_up,
-//                        dice_1_right,
-//                        dice_1_left,
-//                        dice_1_front,
-//                        dice_1_back,
-//                        dice_1_dot1,
-//                        dice_1_dot2,
-//                        dice_3_dots2.get(0),
-//                        dice_3_dots2.get(1),
-//                        dice_3_dots2.get(2),
-//                        dice_2_dors2.get(0),
-//                        dice_2_dors2.get(1),
-//                        dice_2_dors1.get(0),
-//                        dice_2_dors1.get(1),
-//                        dice_3_dots1.get(0),
-//                        dice_3_dots1.get(1),
-//                        dice_3_dots1.get(2),
-//                        bord,
-//                        dice_5_top_dots1.get(0),
-//                        dice_5_top_dots1.get(1),
-//                        dice_5_top_dots1.get(2),
-//                        dice_5_top_dots1.get(3),
-//                        dice_5_top_dots1.get(4),
-//                        dice_6_top_dots1.get(0),
-//                        dice_6_top_dots1.get(1),
-//                        dice_6_top_dots1.get(2),
-//                        dice_6_top_dots1.get(3),
-//                        dice_6_top_dots1.get(4),
-//                        dice_6_top_dots1.get(5),
-//                        dice_4_top_dots1.get(0),
-//                        dice_4_top_dots1.get(1),
-//                        dice_4_top_dots1.get(2),
-//                        dice_4_top_dots1.get(3),
-//                        triangul_1_red.get(0),
-//                        triangul_1_red.get(1),
-//                        triangul_1_red.get(2),
-//                        triangul_1_black.get(0),
-//                        triangul_1_black.get(1),
-//                        triangul_1_black.get(2),
-//                        triangul_2_red.get(0),
-//                        triangul_2_red.get(1),
-//                        triangul_2_red.get(2),
-//                        triangul_2_black.get(0),
-//                        triangul_2_black.get(1),
-//                        triangul_2_black.get(2),
-//                        triangul_3_red.get(0),
-//                        triangul_3_red.get(1),
-//                        triangul_3_red.get(2),
-//                        triangul_3_black.get(0),
-//                        triangul_3_black.get(1),
-//                        triangul_3_black.get(2),
-//                        triangul_4_red.get(0),
-//                        triangul_4_red.get(1),
-//                        triangul_4_red.get(2),
-//                        triangul_4_black.get(0),
-//                        triangul_4_black.get(1),
-//                        triangul_4_black.get(2),
-//                        dice_4_top_dots2.get(0),
-//                        dice_4_top_dots2.get(1),
-//                        dice_4_top_dots2.get(2),
-//                        dice_4_top_dots2.get(3),
-//                        R_border_1_border_up,
-//                        R_border_1_border_down,
-//                        R_border_1_border_left,
-//                        R_border_1_border_right,
-//                        R_border_1_border_top,
-//                        R_border_1_buttom,
-//                        D_border_2_buttom,
-//                        D_border_2_border_top,
-//                        D_border_2_border_right,
-//                        D_border_2_border_left,
-//                        MR_border_3_buttom,
-//                        MR_border_3_border_top,
-//                        MR_border_3_border_right,
-//                        MR_border_3_border_left,
-//                        MR_border_3_border_down,
-//                        MR_border_3_border_up,
-//                        U_border_4_buttom,
-//                        U_border_4_border_top,
-//                        U_border_4_border_right,
-//                        U_border_4_border_left,
-//                        ML_border_5_buttom,
-//                        ML_border_5_border_top,
-//                        ML_border_5_border_right,
-//                        ML_border_5_border_left,
-//                        ML_border_5_border_down,
-//                        ML_border_5_border_up,
-//                        LD_border_2_buttom,
-//                        LD_border_2_border_top,
-//                        LD_border_2_border_right,
-//                        LD_border_2_border_left,
-//                        LL_border_5_buttom,
-//                        LL_border_5_border_top,
-//                        LL_border_5_border_right,
-//                        LL_border_5_border_left,
-//                        LL_border_5_border_down,
-//                        LL_border_5_border_up,
-//                        LU_border_4_buttom,
-//                        LU_border_4_border_top,
-//                        LU_border_4_border_right,
-//                        LU_border_4_border_left,
-//                        two_buttom_black_pices.get(0),
-//                        two_buttom_black_pices.get(1),
-//                        five_buttom_black_pices.get(0),
-//                        five_buttom_black_pices.get(1),
-//                        five_buttom_black_pices.get(2),
-//                        five_buttom_black_pices.get(3),
-//                        five_buttom_black_pices.get(4),
-//                        five_upper_black_pices.get(0),
-//                        five_upper_black_pices.get(1),
-//                        five_upper_black_pices.get(2),
-//                        five_upper_black_pices.get(3),
-//                        five_upper_black_pices.get(4),
-//                        three_upper_black_pices.get(0),
-//                        three_upper_black_pices.get(1),
-//                        three_upper_black_pices.get(2),
-//                        two_buttom_black_pices.get(0),
-//                        two_buttom_black_pices.get(1),
-//                        five_buttom_black_pices.get(0),
-//                        five_buttom_black_pices.get(1),
-//                        five_buttom_black_pices.get(2),
-//                        five_buttom_black_pices.get(3),
-//                        five_buttom_black_pices.get(4),
-//                        five_upper_black_pices.get(0),
-//                        five_upper_black_pices.get(1),
-//                        five_upper_black_pices.get(2),
-//                        five_upper_black_pices.get(3),
-//                        five_upper_black_pices.get(4),
-//                        three_upper_black_pices.get(0),
-//                        three_upper_black_pices.get(1),
-//                        three_upper_black_pices.get(2),
-//                        two_buttom_white_pices.get(0),
-//                        two_buttom_white_pices.get(1),
-//                        five_buttom_white_pices.get(0),
-//                        five_buttom_white_pices.get(1),
-//                        five_buttom_white_pices.get(2),
-//                        five_buttom_white_pices.get(3),
-//                        five_buttom_white_pices.get(4),
-//                        five_upper_white_pices.get(0),
-//                        five_upper_white_pices.get(1),
-//                        five_upper_white_pices.get(2),
-//                        five_upper_white_pices.get(3),
-//                        five_upper_white_pices.get(4),
-//                        three_upper_white_pices.get(0),
-//                        three_upper_white_pices.get(1),
-//                        three_upper_white_pices.get(2)
-//                        ))
-//                .setBackground(new Color(255, 255, 255))
-//                .setLights(lights)
-//                .setBackground(new Color(0, 102d, 102d))
-//                .build();
 
         Scene scene = new Scene.SceneBuilder("game")
 //                .setAmbientLight(new AmbientLight(new Color(96,96,96), new Double3(.15)))
@@ -531,6 +479,8 @@ public class Backgammon {
                 .setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene))
                 .setAntiAliasing(AntiAliasing.RANDOM).setM(20).setN(20)
+                .setMultithreading(3)
+                .setDebugPrint(0.1)
                 .build();
         camera.renderImage(); //
         camera.writeToImage();
@@ -543,7 +493,7 @@ public class Backgammon {
         lights.clear();
         lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
                 .setKL(4E-5).setKQ(2E-5));
-        lights.add(new SpotLight(new Color(WHITE), new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
                 .setKL(4E-5).setKQ(2E-5));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
@@ -577,7 +527,7 @@ public class Backgammon {
         lights.clear();
         lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
                 .setKL(4E-5).setKQ(2E-5));
-        lights.add(new SpotLight(new Color(WHITE), new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
                 .setKL(4E-5).setKQ(2E-5));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
@@ -598,6 +548,8 @@ public class Backgammon {
                 .setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene))
                 .setAntiAliasing(AntiAliasing.ADAPTIVE).setM(9).setN(9)
+                .setMultithreading(3)
+                .setDebugPrint(0.1)
                 .build();//
 
         camera.renderImage(); //
@@ -611,7 +563,7 @@ public class Backgammon {
         lights.clear();
         lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
                 .setKL(4E-5).setKQ(2E-5));
-        lights.add(new SpotLight(new Color(WHITE), new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
                 .setKL(4E-5).setKQ(2E-5));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
@@ -631,6 +583,8 @@ public class Backgammon {
                 .setVPDistance(200)
                 .setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene))
+                .setMultithreading(3)
+                .setDebugPrint(0.1)
                 .build();//
 
         camera.renderImage(); //
@@ -644,7 +598,7 @@ public class Backgammon {
         lights.clear();
         lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
                 .setKL(4E-5).setKQ(2E-5));
-        lights.add(new SpotLight(new Color(WHITE), new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
                 .setKL(4E-5).setKQ(2E-5));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
@@ -679,7 +633,7 @@ public class Backgammon {
         lights.clear();
         lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
                 .setKL(4E-5).setKQ(2E-5));
-        lights.add(new SpotLight(new Color(WHITE), new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
                 .setKL(4E-5).setKQ(2E-5));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
         lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
@@ -700,13 +654,44 @@ public class Backgammon {
                 .setVPDistance(200)
                 .setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene))
+                .setDebugPrint(0.2)
                 .build();//
 
         camera.renderImage(); //
         camera.writeToImage();
-
-
     }
+
+//    @Test
+//    public void gameTestbbbbbbbbbbbbbb() {
+//        lights.clear();
+//        lights.add(new SpotLight(new Color(BLUE), new Point(-325, 250, 0), new Vector(0, 0, -200)) //
+//                .setKL(4E-5).setKQ(2E-5));
+//        lights.add(new SpotLight(WHITE, new Point(-175, 240, 20), new Vector(-1, 0, -1)) //
+//                .setKL(4E-5).setKQ(2E-5));
+//        lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,0,-1)));
+//        lights.add(new DirectionalLight(new Color(160,160,160),new Vector(-1,1,-1)));
+//
+//        Scene scene = new Scene.SceneBuilder("game")
+////                .setAmbientLight(new AmbientLight(new Color(96,96,96), new Double3(.15)))
+//                .setGeometries(all_game
+//                )
+//                .setBackground(new Color(255, 255, 255))
+//                .setLights(lights)
+//                .setBackground(new Color(0, 102d, 102d))
+//                .build();
+//
+//        ImageWriter imageWriter = new ImageWriter("Backgammonbbbbbbbbbbbbbbbbbbb", 600, 600);
+//
+//            Camera camera = new Camera.CameraBuilder(new Point(-500, 300, 300), new Vector(1, 0, 0), new Vector(0, 0, 1)) //
+//                .setVPSize(1500, 1000)
+//                .setVPDistance(1000)
+//                .setImageWriter(imageWriter) //
+//                .setRayTracerBase(new RayTracerBasic(scene))
+//                .build();//
+//
+//        camera.renderImage(); //
+//        camera.writeToImage();
+//    }
 
 
 }
